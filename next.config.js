@@ -4,7 +4,7 @@
 const nextConfig = {
   images: {
     loader: "default",
-    domains: ["localhost"],
+    domains: ["localhost", "robsitebackend.herokuapp.com", "inkedillubucket.s3.ap-southeast-2.amazonaws.com"],
   },
 }
 
