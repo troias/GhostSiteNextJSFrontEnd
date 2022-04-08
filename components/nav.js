@@ -8,7 +8,7 @@ const Nav = ({ categories }) => {
       <nav className="uk-navbar-container flex pl-10 pr-4" data-uk-navbar>
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav ">
-            <ul class="uk-nav uk-navbar-dropdown-nav"></ul>
+            <ul className="uk-nav uk-navbar-dropdown-nav"></ul>
             <li className="m-0">
               <Link href="/">
                 <a>Scary Site</a>
@@ -32,7 +32,7 @@ const Nav = ({ categories }) => {
               </li>
             </ul>
    
-          <ul class="uk-navbar-nav">
+          <ul className="uk-navbar-nav">
             <li>
                 <a href="#">Categories</a>
                 <div className="uk-navbar-dropdown">

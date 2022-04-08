@@ -15,44 +15,33 @@ const Home = ({ articles, categories, homepage }) => {
       <Seo seo={homepage.attributes.seo} />
       <div className="pl-8 ">
         <div className="pl-8 pr-8  ">
-          <div className="pb-4"> 
-        <h1 className="text-4xl">{homepage.attributes.hero.title}</h1>
-        </div>
+          <div className="pb-4">
+            <h1 className="text-4xl">{homepage.attributes.hero.title}</h1>
+          </div>
           <div >
-            <NextImage image={homepage.attributes.hero.heroImage}  className="h-screen"/> 
+            <NextImage image={homepage.attributes.hero.heroImage} className="h-screen" />
           </div>
           <div className="pt-4">
             <p className="text-xl">{homepage.attributes.hero.info}</p>
-
-            </div>
-
-
-        <div className="article-section pt-8">
-          <div className="article-section">
-          <h2 className="text-2xl">Articles</h2>
           </div>
-
-          <div className="pt-4">
-
-         
-          <Articles articles={articles} />
-          </div>
-          
-          <div>
-            <h1>
-            about us
-            </h1>
+          <div className="article-section pt-8">
+            <div className="article-section">
+              <h2 className="text-2xl">Articles</h2>
             </div>
-            
+            <div className="pt-4">
+              <Articles articles={articles} />
+            </div>
             <div>
               <h1>
-              contact
+                about us
               </h1>
-              </div>
-
+            </div>
+            <div>
+              <h1>
+                contact
+              </h1>
+            </div>
           </div>
-
-          
         </div>
       </div>
     </Layout>
