@@ -7,9 +7,6 @@ import { fetchAPI } from "../lib/api"
 import NextImage from "../components/image"
 
 const Home = ({ articles, categories, homepage }) => {
-
-  // console.log("homePageprops", homepage);
-
   return (
     <Layout categories={categories}>
       <Seo seo={homepage.attributes.seo} />
