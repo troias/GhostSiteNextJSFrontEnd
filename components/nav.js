@@ -9,7 +9,7 @@ const Nav = ({ categories }) => {
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav ">
             <ul class="uk-nav uk-navbar-dropdown-nav"></ul>
-            <li className="">
+            <li className="m-0">
               <Link href="/">
                 <a>Scary Site</a>
               </Link>
@@ -18,12 +18,25 @@ const Nav = ({ categories }) => {
         </div>
         <div className="uk-navbar-right  ">
 
- 
+            <ul className="uk-navbar-nav hidden sm:flex">
+       
+              <li className="">
+                <Link href="/about">
+                  <a>About</a>
+                </Link>
+              </li>
+              <li className="">
+                <Link href="/contact">
+                  <a>Contact</a>
+                </Link>
+              </li>
+            </ul>
+   
           <ul class="uk-navbar-nav">
             <li>
-                <a href="#">Parent</a>
-                <div class="uk-navbar-dropdown">
-                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                <a href="#">Categories</a>
+                <div className="uk-navbar-dropdown">
+                    <ul className="uk-nav uk-navbar-dropdown-nav">
                     {categories.map((category) => {
                   return (
                     <li key={category.id} className="pl-2 pr-2" >

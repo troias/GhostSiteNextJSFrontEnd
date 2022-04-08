@@ -37,6 +37,18 @@ const Home = ({ articles, categories, homepage }) => {
          
           <Articles articles={articles} />
           </div>
+          
+          <div>
+            <h1>
+            about us
+            </h1>
+            </div>
+            
+            <div>
+              <h1>
+              contact
+              </h1>
+              </div>
 
           </div>
 
