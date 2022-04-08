@@ -1,6 +1,6 @@
 import React from "react"
 import Articles from "../components/articles"
-import Image from 'next/image'
+
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { fetchAPI } from "../lib/api"
@@ -8,7 +8,7 @@ import NextImage from "../components/image"
 
 const Home = ({ articles, categories, homepage }) => {
 
-  console.log("homePageprops", homepage);
+  // console.log("homePageprops", homepage);
 
   return (
     <Layout categories={categories}>
@@ -18,8 +18,8 @@ const Home = ({ articles, categories, homepage }) => {
           <div className="pb-4"> 
         <h1 className="text-4xl">{homepage.attributes.hero.title}</h1>
         </div>
-          <div className="">
-            <NextImage image={homepage.attributes.hero.heroImage}  className=" h-screen"/> 
+          <div >
+            <NextImage image={homepage.attributes.hero.heroImage}  className="h-screen"/> 
           </div>
           <div className="pt-4">
             <p className="text-xl">{homepage.attributes.hero.info}</p>
