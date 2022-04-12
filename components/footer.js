@@ -4,8 +4,8 @@ import React from 'react'
   return (
     <div className="uk-container border-t-2 ">
         <div className="uk-text-center pb-8 pt-8 ">
-        <a href="" uk-icon="icon: facebook" className="pr-4"></a>
-        <a href="" uk-icon="icon: instagram" className=""></a>
+        <a href="" uk-icon="icon: facebook" className="pr-4 text-black"></a>
+        <a href="" uk-icon="icon: instagram" className="text-black"></a>
      
         </div>
         <div className="uk-text-center pb-4">

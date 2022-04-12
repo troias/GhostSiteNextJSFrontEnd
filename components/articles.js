@@ -7,6 +7,8 @@ const Articles = ({ articles }) => {
   const rightArticles = articles.slice(leftArticlesCount, articles.length)
 
   return (
+    <div className="article-section pt-8">
+    <h2 className="text-4xl pb-8 ">Articles</h2>
     <div>
       <div className="uk-child-width-1-2@s" data-uk-grid="true">
         <div>
@@ -32,6 +34,7 @@ const Articles = ({ articles }) => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   )
 }
