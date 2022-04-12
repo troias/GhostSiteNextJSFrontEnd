@@ -30,12 +30,12 @@ const Nav = ({ categories }) => {
           <ul className="uk-navbar-nav hidden sm:flex">
 
             <li className="">
-              <Link href="/about">
+              <Link href="#about">
                 <a>About</a>
               </Link>
             </li>
             <li className="">
-              <Link href="/contact">
+              <Link href="#contact">
                 <a>Contact</a>
               </Link>
             </li>

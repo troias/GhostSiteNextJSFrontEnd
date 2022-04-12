@@ -7,6 +7,7 @@ import {AiOutlineYoutube} from 'react-icons/ai'
  const AboutUs = (props) => {
    
   return (
+    <section id="#about">
     <div className="uk-tile-default  border-t-2 ">
     <h1 className="text-4xl pt-8 ">
       about us
@@ -34,6 +35,7 @@ import {AiOutlineYoutube} from 'react-icons/ai'
       </div>
     </div>
   </div>
+  </section>
   )
 }
 

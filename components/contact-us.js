@@ -2,6 +2,7 @@ import React from 'react'
 
  const ContactUs = (props) => {
   return (
+    <section id="#contact" > 
     <div className="uk-tile-default">
     <h1 className="text-4xl ">
       contact
@@ -50,6 +51,7 @@ import React from 'react'
     </div>
 
   </div>
+  </section>
   )
 }
 
