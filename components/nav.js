@@ -1,8 +1,16 @@
-import React from "react"
+import React, {useState} from "react"
 import Link from "next/link"
 import NextImage from "../components/image"
 
+
 const Nav = ({ categories }) => {
+
+  const [modal, setModal] = useState(false)
+
+  const toggleModal = () => {
+    setModal(!modal)
+  }
+
   return (
     <>
     <div>
@@ -54,10 +62,10 @@ const Nav = ({ categories }) => {
                 </ul>
               </div>
             </li>
-            <li>
-              <a>
-                <button uk-toggle="target: #my-id" type="button">Login</button>
-              </a>
+            <li className="flex items-center">
+               
+            <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #modal-example">Login</button>
+              
          
 
             </li>
