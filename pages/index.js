@@ -1,10 +1,12 @@
-import React from "react"
+import React, {useState} from "react"
 import Articles from "../components/articles"
 import Hero from "../components/hero"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import AboutUs from "../components/about-us"
 import ContactUs from "../components/contact-us"
+import Modal from "../components/modal"
+import Portal from "../components/portal"
 
 
 import { fetchAPI } from "../lib/api"
@@ -16,31 +18,23 @@ import { fetchAPI } from "../lib/api"
 
 
 const Home = ({ articles, categories, homepage }) => {
+
+  const [showModal, setShowModal] = useState(false);
+
+  console.log("showModal", showModal) 
+
   return (
-    <Layout categories={categories}>
+    <Layout showModal={setShowModal} categories={categories}>
       <Seo seo={homepage.attributes.seo} />
       <div className=" ">
         <div className="pl-8 pr-8 ">
-      
-
-
           <div className="article-section pt-8  ">
-
-
-
               <Hero herodata={homepage} /> 
+                  <Modal show={showModal} onClose={setShowModal}/>
               <Articles articles={articles} />
               <AboutUs aboutData={homepage}/> 
               <ContactUs />
-       
-
-            {/* about component */}
-
-
-
-   
-
-
+        
 
           </div>
         </div>

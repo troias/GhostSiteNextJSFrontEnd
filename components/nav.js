@@ -1,14 +1,23 @@
 import React, {useState} from "react"
 import Link from "next/link"
 import NextImage from "../components/image"
+import Portal from "../components/portal"
+import Modal from "../components/modal"
+
+const Nav = ({ categories, showModal }) => {
 
 
-const Nav = ({ categories }) => {
 
   const [modal, setModal] = useState(false)
 
-  const toggleModal = () => {
-    setModal(!modal)
+  // const toggleModal = () => {
+  //   setModal(!modal)
+  //   showModal(modal)
+  // }
+
+  const handleCloseClick = (e) => {
+    e.preventDefault()
+    setModal(false)
   }
 
   return (
@@ -63,10 +72,10 @@ const Nav = ({ categories }) => {
               </div>
             </li>
             <li className="flex items-center">
-               
-            <button class="uk-button uk-button-default uk-margin-small-right" type="button" uk-toggle="target: #modal-example">Login</button>
-              
-         
+            <button class="uk-button uk-button-default uk-margin-small-right"
+            onClick={() => showModal(true)}>   Login</button>
+                  
+        
 
             </li>
           </ul>
@@ -76,12 +85,7 @@ const Nav = ({ categories }) => {
       </nav>
    
     </div>
-       <div id="my-id" uk-modal>
-       <div class="uk-modal-dialog uk-modal-body">
-         <h2 class="uk-modal-title"></h2>
-         <button class="uk-modal-close" type="button">Close</button>
-       </div>
-     </div>
+
      </>
   )
 }
