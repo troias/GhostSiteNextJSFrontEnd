@@ -4,6 +4,7 @@ import "../assets/css/style.css"
 import { createContext } from "react"
 import { fetchAPI } from "../lib/api"
 import { getStrapiMedia } from "../lib/media"
+import { AuthProvider } from "../context/authContext"
 import "../styles/global.css"
 
 // Store Strapi Global object in context
@@ -21,7 +22,9 @@ const MyApp = ({ Component, pageProps }) => {
         />
       </Head>
       <GlobalContext.Provider value={global.attributes}>
+        <AuthProvider>
         <Component {...pageProps} />
+        </AuthProvider>
       </GlobalContext.Provider>
     </>
   )

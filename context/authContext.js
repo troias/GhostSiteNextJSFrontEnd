@@ -1,12 +1,13 @@
 import { createContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { fetchAPI } from "../utils/api";
+
 
 export const AuthContext = createContext();
 
 export const AuthProvider = (props) => {
 
   const router = useRouter();
+  
   const [user, setUser] = useState();
   const [success] = useState("");
   const [error, setError] = useState("");
