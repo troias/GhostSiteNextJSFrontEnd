@@ -1,24 +1,16 @@
-import React, {useState} from "react"
+import React, {useState, useContext, useEffect} from "react"
 import Link from "next/link"
+import AuthContext from "../context/authContext"
 import NextImage from "../components/image"
 import Portal from "../components/portal"
 import Modal from "../components/modal"
 
 const Nav = ({ categories, showModal }) => {
 
+  const ctx = useContext(AuthContext);
+  
 
 
-  const [modal, setModal] = useState(false)
-
-  // const toggleModal = () => {
-  //   setModal(!modal)
-  //   showModal(modal)
-  // }
-
-  const handleCloseClick = (e) => {
-    e.preventDefault()
-    setModal(false)
-  }
 
   return (
     <>
@@ -72,8 +64,13 @@ const Nav = ({ categories, showModal }) => {
               </div>
             </li>
             <li className="flex items-center">
-            <button class="uk-button uk-button-default uk-margin-small-right"
-            onClick={() => showModal(true)}>   Login</button>
+            {!ctx.user && <button class="uk-button uk-button-default uk-margin-small-right"
+            onClick={() => ctx.setModalOpen(true) }>Login</button>}
+
+
+          { ctx.user &&  <button class="uk-button uk-button-default uk-margin-small-right"
+            onClick={() => ctx.logOutUser()}>Logout</button>}
+
                   
         
 

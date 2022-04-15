@@ -1,17 +1,19 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import ReactDOM from "react-dom";
 
 import ModalContent from './modalContent';
+import AuthContext from '../context/authContext';
 
 
 
-const Modal = ({ show, onClose, children, title }) => {
+const Modal = ({  }) => {
 
-  console.log("showModalComp", show);
+  
 
+  const ctx = useContext(AuthContext);
   const [isBrowser, setIsBrowser] = useState(false);
 
-
+   console.log("modalOpen", ctx.modalOpen)
  
 
   useEffect(() => {
@@ -21,7 +23,7 @@ const Modal = ({ show, onClose, children, title }) => {
 
 
 
-  const modalContent = show ? <ModalContent onClose={onClose}/> : null;
+  const modalContent = ctx.modalOpen ? <ModalContent /> : null;
 
   if (isBrowser) {
     return ReactDOM.createPortal(modalContent

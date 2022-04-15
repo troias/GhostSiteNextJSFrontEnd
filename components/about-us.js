@@ -25,7 +25,7 @@ import {AiOutlineYoutube} from 'react-icons/ai'
       </div>
       <div className=" md:visible md:w-1/2 md:pl-8 md:flex md:justify-center">
         
-      <div className="uk-text-center  w-full flex justify-around md:w-2/3">
+      <div className="uk-text-center  w-full flex justify-around md:w-2/3 p-8">
        <BsInstagram size={40}/>
        <AiOutlineFacebook size={50}/>
        <TiSocialTwitterCircular size={50}/>

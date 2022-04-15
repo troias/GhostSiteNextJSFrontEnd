@@ -9,11 +9,25 @@ export const AuthProvider = (props) => {
   const router = useRouter();
   
   const [user, setUser] = useState();
-  const [success] = useState("");
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [isLoggedIn, setLoggedIn] = useState(false);
+  const [isLoading, setLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [loggingIn, setLoggingIn] = useState(false);
+  const [registering, setRegistering] = useState(false);
+ 
 
-  console.log("userLogin", user)
+  // console.log("userLogin", user)
+
+  const toggleRegister = (e) => {
+      
+    setRegistering(!registering);
+    setLoggingIn(false);
+};
+
+
+
 
   const logOutUser = () => {
 
@@ -24,8 +38,8 @@ export const AuthProvider = (props) => {
 
   };
 
-  const registerUser = async (email, password) => {
-
+  const registerUser = async (username, email, password) => {
+    setIsLoading(true);
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/local/register`, {
         method: "POST",
@@ -33,20 +47,22 @@ export const AuthProvider = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-           email,
+          username,
+          email,
           password,
         },
         ),
       });
       const data = await response.json();
-      console.log("registerUserData", data);
+      // console.log("registerUserData", data);
       
       if (data.user) {
         localStorage.setItem("user", JSON.stringify(data));
 
         setUser(data);
         setLoggedIn(true);
-        console.log("login", data)
+        setIsLoading(false);
+        // console.log("login", data)
         return data;
       }
 
@@ -55,7 +71,7 @@ export const AuthProvider = (props) => {
 
       if (data.error.message) {
         setError(data.error.message);
-        console.log("returned", data.error.message);
+        // console.log("returned", data.error.message);
         return data.error;
       }
 
@@ -66,8 +82,11 @@ export const AuthProvider = (props) => {
 
   };
 
-  const loginUser = async (email, password) => {
+  const loginUser = async (identifier, password) => {
+
+    // console.log("logindatacheck", identifier, password);
     try {
+      setLoading(true);
 
       const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/local`, {
         method: "POST",
@@ -75,20 +94,22 @@ export const AuthProvider = (props) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          identifier: email,
-          password: password,
+          identifier,
+          password,
         },
         ),
       });
       const data = await response.json();
 
-      console.log("Logindata", data)
+      // console.log("Logindata", data)
 
       if (data.user) {
         localStorage.setItem("user", JSON.stringify(data));
-
+        setLoading(false);
         setUser(data);
         setLoggedIn(true);
+        setSuccess(true);
+        setModalOpen(false);
         console.log("login", data)
         return data;
       }
@@ -98,18 +119,18 @@ export const AuthProvider = (props) => {
 
       if (data.error.message) {
         setError(data.error.message);
-        console.log("returned", data.error.message);
+        // console.log("returned", data.error.message);
         return data.error;
       }
       // console.log("login", data)
 
-
+      setLoading(false);
 
 
 
 
     } catch (error) {
-      console.log("error", error);
+      // console.log("error", error);
       setError("something went wrong" + error);
       return error
     }
@@ -143,7 +164,11 @@ export const AuthProvider = (props) => {
         logOutUser,
         checkIsLoggedIn,
         registerUser,
-
+        setModalOpen,
+        isLoading,
+        modalOpen,
+        registering,
+        toggleRegister, 
       }}
     >
       {props.children}
