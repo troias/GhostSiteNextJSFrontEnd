@@ -1,8 +1,10 @@
-import React, {useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 const ContactUs = (props) => {
+
+  const [fileArr, setFileArr] = useState([]);
 
   const fileRef = useRef(null);
   // console.log("fileRef", fileRef)
@@ -23,25 +25,42 @@ const ContactUs = (props) => {
     }),
     onSubmit: async values => {
       console.log("contactFormValues", values);
-      // const formData = new FormData();
-      // formData.append('name', values.name);
-      // formData.append('reason', values.reason);
-      // formData.append('info', values.message);
-      // formData.append('media', values.file);
+      
+      const formData = new FormData();
+      formData.append('name', values.name);
+      formData.append('reason', values.reason);
+      formData.append('info', values.message);
+       
+      for (let i = 0; i < values.file.length; i++) {
+        formData.append('media', values.file[i]);
+      }
+
+      for (let i in formData ){
+        console.log("formData[i]", formData[i])
+      }
       // console.log("formData", formData);
       // formData.forEach((value, key) => {
       //   console.log("key", key);
       //   console.log("value", value);
       // }
       // )
-      // const response = await fetch('http://localhost:1337/api/form-infos', {
+      
+
+      // const response = await fetch('http://localhost:1337/api/lead-form-submissions', {
       //   method: 'POST',
-      //   body: formData
+      //   headers: {
+      //     'Content-Type': 'application/json'
+      //   },
+      //   body: JSON.stringify({
+      //     data: formData
+          
+      //   })
+
       // });
       // const data = await response.json();
       // console.log("data", data);
 
-      // if (data.success) {
+      // if (!data.error) {
       //   alert("Your message has been sent successfully");
       // }
       // else {
@@ -50,7 +69,31 @@ const ContactUs = (props) => {
     },
   });
 
+    const handleFileChange = (e) => {
+      console.log("e", e.target.files);
+      // formik.setFieldValue('file', e.target.files);
+      const fileList = e.target.files;
+      const fileArray = [];
+      for (let i = 0; i < fileList.length; i++) {
+        fileArray.push(fileList[i]);
+      }
+      setFileArr(fileArray);
+       console.log("firstFile", fileArray);
+
+
+    }
   
+    const onFileChange = (e) => {
+      console.log("e", e.target.files);
+     formik.setFieldValue('media', e.target.files);
+      const fileList = e.target.files;
+      const fileArray = [];
+      for (let i = 0; i < fileList.length; i++) {
+        fileArray.push(fileList[i]);
+      }
+      setFileArr(fileArray);
+        console.log("firstFile", fileArray);
+    }
 
   return (
     <section id="#contact" >
@@ -113,12 +156,54 @@ const ContactUs = (props) => {
                 <div>
                   <span className="btn btn-primary btn-file">
                     <span className="fileupload-new pr-4" >Select file</span>
-                    <input ref={fileRef} id="file" type="file" onChange={(e) =>  formik.setFieldValue('file', e.target.files[0])} />
+
+                    {/* <input  
+                   
+                    id="file" 
+                    type="file" 
+                    onChange={(e) =>  
+              {      formik.setFieldValue('file', {
+                      ...formik.values.file,
+                      [e.currentTarget.name]: e.currentTarget.files
+                    } 
+                     )
+                     handleFileChange(e)
+                    
+                    
+                    }
+                     
+                     
+                     } multiple /> */}
+
+                <input type="file" id="file"  multiple onChange={onFileChange}  ref={fileRef} />
+                <div  className="w-full flex justify-around pt-4 flex-wrap ">
+              {       
+               
+                  fileArr.map((file, index) => {
+                        console.log("file", file);
+                        return (
+                        
+                            <span className="  uk-border-rounded flex justify-around  flex-wrap " key={index}>
+                              <img src={URL.createObjectURL(file)} alt="preview" className="w-[150px] h-[150px]" />
+                              </span>
+                         
+                        )})
+                       
+                      }
+                       </div>
+
+
+                 
 
               
                
                   </span>
-                 { fileRef.current === null ? null : <a href="#" id="remove" className="btn fileupload-exists" data-dismiss="fileupload" onClick={(e) => document.getElementById('file').value = null }>Remove</a>}
+                 { fileRef.current === null ? null : <a href="#" id="remove" className="btn fileupload-exists" data-dismiss="fileupload"   onClick={(e) => {
+                    e.preventDefault();
+                      document.getElementById('file').value = null 
+                      fileRef.current = null
+                      setFileArr([])
+                   } } >Remove</a>}
                 </div>
               </div>
 

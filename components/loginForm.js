@@ -127,7 +127,7 @@ const LoginForm = () => {
 
 
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-                Not registered? <a className="text-blue-700 hover:underline dark:text-blue-500" onClick={ctx.toggleRegister}>Create account</a>
+                {!ctx.registering ? "Not registered" : "Registered"} <a className="text-blue-700 hover:underline dark:text-blue-500" onClick={ctx.toggleRegister}>{!ctx.registering? "Create account" : "Log in"}</a>
             </div>
 
 
