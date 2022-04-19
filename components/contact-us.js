@@ -13,7 +13,7 @@ const ContactUs = (props) => {
       name: '',
       reason: '',
       message: '', 
-      file: null
+      media: null
     },
     validationSchema: Yup.object({
       name: Yup.string()
@@ -24,67 +24,45 @@ const ContactUs = (props) => {
         .required('Required')
     }),
     onSubmit: async values => {
-      console.log("contactFormValues", values);
+      //  console.log("contactFormValues", values);
+
+      const innerValbj = {
+        name: values.name,
+        reason: values.reason,
+        info: values.message,
+        
+      }
       
-      const formData = new FormData();
-      formData.append('name', values.name);
-      formData.append('reason', values.reason);
-      formData.append('info', values.message);
-       
-      for (let i = 0; i < values.file.length; i++) {
-        formData.append('media', values.file[i]);
+      const data = new FormData();
+
+      for (let i = 0; i < values.media.length; i++) {
+        data.append('files.media', values.media[i]);
       }
 
-      for (let i in formData ){
-        console.log("formData[i]", formData[i])
-      }
-      // console.log("formData", formData);
-      // formData.forEach((value, key) => {
-      //   console.log("key", key);
-      //   console.log("value", value);
-      // }
-      // )
-      
+      data.append('data', JSON.stringify(innerValbj));
 
-      // const response = await fetch('http://localhost:1337/api/lead-form-submissions', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify({
-      //     data: formData
-          
-      //   })
 
-      // });
-      // const data = await response.json();
+      const request = await fetch('http://localhost:1337/api/lead-form-submissions', {
+        method: 'POST',
+        body: data
+      });
+
+      const response = await request.json();
       // console.log("data", data);
 
-      // if (!data.error) {
-      //   alert("Your message has been sent successfully");
-      // }
-      // else {
-      //   alert("Something went wrong");
-      // }
+      if (!response.error) {
+        alert("Your message has been sent successfully");
+      }
+      else {
+        alert("Something went wrong");
+      }
+
     },
   });
 
-    const handleFileChange = (e) => {
-      console.log("e", e.target.files);
-      // formik.setFieldValue('file', e.target.files);
-      const fileList = e.target.files;
-      const fileArray = [];
-      for (let i = 0; i < fileList.length; i++) {
-        fileArray.push(fileList[i]);
-      }
-      setFileArr(fileArray);
-       console.log("firstFile", fileArray);
-
-
-    }
   
     const onFileChange = (e) => {
-      console.log("e", e.target.files);
+      // console.log("e", e.target.files);
      formik.setFieldValue('media', e.target.files);
       const fileList = e.target.files;
       const fileArray = [];
@@ -92,7 +70,7 @@ const ContactUs = (props) => {
         fileArray.push(fileList[i]);
       }
       setFileArr(fileArray);
-        console.log("firstFile", fileArray);
+        // console.log("firstFile", fileArray);
     }
 
   return (
@@ -175,12 +153,12 @@ const ContactUs = (props) => {
                      
                      } multiple /> */}
 
-                <input type="file" id="file"  multiple onChange={onFileChange}  ref={fileRef} />
+                <input type="file" id="media"  multiple onChange={onFileChange}  ref={fileRef} />
                 <div  className="w-full flex justify-around pt-4 flex-wrap ">
               {       
                
                   fileArr.map((file, index) => {
-                        console.log("file", file);
+                        // console.log("file", file);
                         return (
                         
                             <span className="  uk-border-rounded flex justify-around  flex-wrap " key={index}>
