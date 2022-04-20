@@ -1,8 +1,46 @@
-import React, {useRef, useState} from 'react'
+import React, {useRef, useState, useContext} from 'react'
+import AuthContext from "../context/authContext";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Notification from "../components/notification";
 
 const ContactUs = (props) => {
+
+  const ctx = useContext(AuthContext);
+
+  console.log("isLoggedIn", ctx.user);
+
+  const [status, setStatus] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [message, setMessage] = useState("");
+  const [title, setTitle] = useState("");
+
+  console.log("IndexPageStatus", status);
+
+  if (status === "success") {
+    console.log("inside success")
+    setTimeout(() => {
+      setMessage("")
+      setTitle("")
+      setSubmitting(false);
+      setStatus("")
+      formik.resetForm();
+      fileRef.current.value = null;
+      setFileArr([])
+    }, 1000);
+
+    
+
+    clearTimeout();
+ 
+
+  
+  
+ 
+}
+
+
+
 
   const [fileArr, setFileArr] = useState([]);
 
@@ -26,6 +64,8 @@ const ContactUs = (props) => {
     onSubmit: async values => {
       //  console.log("contactFormValues", values);
 
+
+
       const innerValbj = {
         name: values.name,
         reason: values.reason,
@@ -33,6 +73,7 @@ const ContactUs = (props) => {
         
       }
       
+  
       const data = new FormData();
 
       for (let i = 0; i < values.media.length; i++) {
@@ -42,20 +83,58 @@ const ContactUs = (props) => {
       data.append('data', JSON.stringify(innerValbj));
 
 
-      const request = await fetch('http://localhost:1337/api/lead-form-submissions', {
-        method: 'POST',
-        body: data
-      });
 
-      const response = await request.json();
-      // console.log("data", data);
 
-      if (!response.error) {
-        alert("Your message has been sent successfully");
+      if(ctx.user) {
+        setMessage("pending")
+        setTitle("Submitting investigation")
+        setSubmitting(true);
+        setStatus('pending')
+
+        const userObj = localStorage.getItem("user")
+        const token = JSON.parse(userObj).jwt
+
+
+        const request = await fetch('http://localhost:1337/api/lead-form-submissions', {
+          method: 'POST',
+          authorization: `Bearer ${token}}`,
+          body: data
+        });
+  
+        const response = await request.json();
+        // console.log("data", data);
+
+        
+  
+        if (!response.error) {
+        
+          setTitle("Submitted investigation")
+          setMessage("Success")
+          setStatus("success")   
+          
+        }
+        else {
+          alert("Something went wrong");
+          setTitle("Error submitting investigation")
+          setMessage("error")
+          setStatus('error')
+        }
+
+ 
+
+        
+      
+        
+        
+
+
       }
-      else {
-        alert("Something went wrong");
+
+      if (!ctx.user) {
+        ctx.setModalOpen(true)
+        
       }
+      
 
     },
   });
@@ -75,6 +154,7 @@ const ContactUs = (props) => {
 
   return (
     <section id="#contact" >
+      {status && <Notification message={message} title={title} submitting={submitting} status={status} />}
       <div className="uk-tile-default">
         <h1 className="text-4xl ">
           contact
@@ -135,24 +215,7 @@ const ContactUs = (props) => {
                   <span className="btn btn-primary btn-file">
                     <span className="fileupload-new pr-4" >Select file</span>
 
-                    {/* <input  
-                   
-                    id="file" 
-                    type="file" 
-                    onChange={(e) =>  
-              {      formik.setFieldValue('file', {
-                      ...formik.values.file,
-                      [e.currentTarget.name]: e.currentTarget.files
-                    } 
-                     )
-                     handleFileChange(e)
-                    
-                    
-                    }
-                     
-                     
-                     } multiple /> */}
-
+  
                 <input type="file" id="media"  multiple onChange={onFileChange}  ref={fileRef} />
                 <div  className="w-full flex justify-around pt-4 flex-wrap ">
               {       
@@ -170,11 +233,6 @@ const ContactUs = (props) => {
                       }
                        </div>
 
-
-                 
-
-              
-               
                   </span>
                  { fileRef.current === null ? null : <a href="#" id="remove" className="btn fileupload-exists" data-dismiss="fileupload"   onClick={(e) => {
                     e.preventDefault();

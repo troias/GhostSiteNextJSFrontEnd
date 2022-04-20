@@ -157,6 +157,7 @@ export const AuthProvider = (props) => {
     <AuthContext.Provider
       value={{
         user,
+        setUser,
         setError,
         success,
         error,

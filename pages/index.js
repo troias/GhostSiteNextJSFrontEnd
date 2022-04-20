@@ -1,4 +1,5 @@
-import React, {useState} from "react"
+import React, {useState, useContext, useEffect} from "react"
+import AuthContext from "../context/authContext";
 import Articles from "../components/articles"
 import Hero from "../components/hero"
 import Layout from "../components/layout"
@@ -18,6 +19,19 @@ import { fetchAPI } from "../lib/api"
 
 
 const Home = ({ articles, categories, homepage }) => {
+
+  const ctx = useContext(AuthContext);
+
+  console.log("user", ctx.user);
+
+  useEffect(() => {
+    if (!ctx.user && localStorage.getItem("user")) {
+      ctx.setUser(JSON.parse(localStorage.getItem("user")));
+     
+    }
+
+  }, [])
+
 
   const [showModal, setShowModal] = useState(false);
 

@@ -65,7 +65,7 @@ const LoginForm = () => {
         <form className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" onSubmit={formik.handleSubmit}>
 
 
-            <h3 className="text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h3>
+            <h3 className="text-xl font-medium text-gray-900 dark:text-white">{!ctx.registering ? "Login to our platform": "Register to out platform"}</h3>
 
             {ctx.registering && <div>
                 <label htmlfor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
@@ -127,7 +127,7 @@ const LoginForm = () => {
 
 
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-                {!ctx.registering ? "Not registered" : "Registered"} <a className="text-blue-700 hover:underline dark:text-blue-500" onClick={ctx.toggleRegister}>{!ctx.registering? "Create account" : "Log in"}</a>
+                {!ctx.registering ? "Not registered" : "Already registered?"} <a className="text-blue-700 hover:underline dark:text-blue-500" onClick={ctx.toggleRegister}>{!ctx.registering? "Create account" : "Log in"}</a>
             </div>
 
 
