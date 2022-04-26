@@ -8,17 +8,20 @@ const ContactUs = (props) => {
 
   const ctx = useContext(AuthContext);
 
-  console.log("isLoggedIn", ctx.user);
+  // const parsedData = JSON.parse(ctx.user);
+  // const userId = parsedData.user.id
+  // console.log("ctxsuser", ctx.user.user.id)
+  // console.log("userID", userId);
 
   const [status, setStatus] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
   const [title, setTitle] = useState("");
 
-  console.log("IndexPageStatus", status);
+
 
   if (status === "success") {
-    console.log("inside success")
+    // console.log("inside success")
     setTimeout(() => {
       setMessage("")
       setTitle("")
@@ -29,21 +32,10 @@ const ContactUs = (props) => {
       setFileArr([])
     }, 1000);
 
-    
-
     clearTimeout();
- 
-
-  
-  
- 
 }
 
-
-
-
   const [fileArr, setFileArr] = useState([]);
-
   const fileRef = useRef(null);
   // console.log("fileRef", fileRef)
   const formik = useFormik({
@@ -65,12 +57,18 @@ const ContactUs = (props) => {
       //  console.log("contactFormValues", values);
 
 
+        
+      
+     
+
+     
+
 
       const innerValbj = {
         name: values.name,
         reason: values.reason,
-        info: values.message,
-        
+        info: values.message,  
+        user: ctx.user.user.id,
       }
       
   

@@ -22,7 +22,7 @@ const Home = ({ articles, categories, homepage }) => {
 
   const ctx = useContext(AuthContext);
 
-  console.log("user", ctx.user);
+  // console.log("user", ctx.user);
 
   useEffect(() => {
     if (!ctx.user && localStorage.getItem("user")) {
