@@ -2,6 +2,7 @@ import Articles from "../../components/articles"
 import { fetchAPI } from "../../lib/api"
 import Layout from "../../components/layout"
 import Seo from "../../components/seo"
+import Investigations from '../../components/investigations'
 
 const Category = ({ category, categories }) => {
   const seo = {
@@ -9,13 +10,17 @@ const Category = ({ category, categories }) => {
     metaDescription: `All ${category.attributes.name} articles`,
   }
 
+  const articles = category.attributes.articles.data
+
+    console.log("category details", category)
   return (
     <Layout categories={categories.data}>
       <Seo seo={seo} />
       <div className="uk-section">
         <div className="uk-container uk-container-large">
           <h1>{category.attributes.name}</h1>
-          <Articles articles={category.attributes.articles.data} />
+          { articles.length > 0 && <Articles articles={category.attributes.articles.data} />}
+           { Investigations.length > 0 && <Investigations investigations={category.attributes.investigations.data} />} 
         </div>
       </div>
     </Layout>
@@ -40,6 +45,9 @@ export async function getStaticProps({ params }) {
     filters: { slug: params.slug },
     populate: {
       articles: {
+        populate: "*",
+      },
+      investigations: {
         populate: "*",
       },
     },

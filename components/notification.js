@@ -41,7 +41,7 @@ function Notification(props) {
 
   const cssClasses = `${classes.notification} ${statusClasses}`;
 
-  console.log("cssClasses", cssClasses);
+  // console.log("cssClasses", cssClasses);
 
   return ReactDOM.createPortal(( <div className={cssClasses}><h2>{title}</h2><p>{message}</p> </div>), document.getElementById("myportal") )
 

@@ -8,7 +8,7 @@ import AboutUs from "../components/about-us"
 import ContactUs from "../components/contact-us"
 import Modal from "../components/modal"
 import Portal from "../components/portal"
-
+import Investigations from "../components/investigations";
 
 import { fetchAPI } from "../lib/api"
 
@@ -46,6 +46,7 @@ const Home = ({ articles, categories, homepage }) => {
               <Hero herodata={homepage} /> 
                   <Modal show={showModal} onClose={setShowModal}/>
               <Articles articles={articles} />
+              <Investigations/>
               <AboutUs aboutData={homepage}/> 
               <ContactUs />
         
