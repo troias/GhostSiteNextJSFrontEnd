@@ -11,6 +11,7 @@ const Category = ({ category, categories }) => {
   }
 
   const articles = category.attributes.articles.data
+  const investigations = category.attributes.investigations.data
 
     console.log("category details", category)
   return (
@@ -20,7 +21,7 @@ const Category = ({ category, categories }) => {
         <div className="uk-container uk-container-large">
           <h1>{category.attributes.name}</h1>
           { articles.length > 0 && <Articles articles={category.attributes.articles.data} />}
-           { Investigations.length > 0 && <Investigations investigations={category.attributes.investigations.data} />} 
+           { investigations.length > 0 && <Investigations investigations={category.attributes.investigations.data} />} 
         </div>
       </div>
     </Layout>

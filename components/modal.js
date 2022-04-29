@@ -13,7 +13,7 @@ const Modal = ({  }) => {
   const ctx = useContext(AuthContext);
   const [isBrowser, setIsBrowser] = useState(false);
 
-   console.log("modalOpen", ctx.modalOpen)
+  //  console.log("modalOpen", ctx.modalOpen)
  
 
   useEffect(() => {

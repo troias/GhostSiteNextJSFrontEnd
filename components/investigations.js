@@ -1,37 +1,43 @@
 import React from 'react'
+import Card from "../components/card"
 
  const Investigations = ({investigations}) => {
 
-    // const leftArticlesCount = Math.ceil(articles.length / 5)
-    // const leftArticles = articles.slice(0, leftArticlesCount)
-    // const rightArticles = articles.slice(leftArticlesCount, articles.length)
-
-    console.log("investigations", investigations)
+     const leftAInvestigationsCount = Math.ceil(investigations.length / 5)
+     const leftInvestigations = investigations.slice(0, leftAInvestigationsCount)
+     const rightInvestigations = investigations.slice(leftAInvestigationsCount, investigations.length)
+    
+    // console.log("investigations", investigations)
+    // console.log("leftInvestigations", leftAInvestigationsCount)
   return (
     <div className="article-section pt-8">
     <h2 className="text-4xl pb-8 ">Investigations</h2>
     <div>
       <div className="uk-child-width-1-2@s" data-uk-grid="true">
         <div>
-          {/* {leftArticles.map((article, i) => {
+          {leftInvestigations.map((investigation, i) => {
+            // console.log("innerInvestigation", investigation)
             return (
               <Card
-                article={article}
-                key={`article__left__${article.attributes.slug}`}
+              
+                investigation={investigation}
+                key={`article__left__${investigation.attributes.slug}`}
               />
+            
             )
-          })} */}
+          })}
         </div>
         <div>
           <div className="uk-child-width-1-2@m uk-grid-match" data-uk-grid>
-            {/* {rightArticles.map((article, i) => {
+            
+            {rightInvestigations.map((investigation, i) => {
               return (
                 <Card
-                  article={article}
-                  key={`article__left__${article.attributes.slug}`}
+                investigation={investigation}
+                  key={`article__left__${investigation.attributes.slug}`}
                 />
               )
-            })} */}
+            })}
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import React, {useRef, useState, useContext} from 'react'
 import AuthContext from "../context/authContext";
+import {ScrollContext} from "../context/scrollContext";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Notification from "../components/notification";
@@ -7,6 +8,11 @@ import Notification from "../components/notification";
 const ContactUs = (props) => {
 
   const ctx = useContext(AuthContext);
+  const scrollCtx = useContext(ScrollContext);
+
+ 
+  console.log("ContactUser", ctx.user)
+
 
   // const parsedData = JSON.parse(ctx.user);
   // const userId = parsedData.user.id
@@ -54,15 +60,8 @@ const ContactUs = (props) => {
         .required('Required')
     }),
     onSubmit: async values => {
-      //  console.log("contactFormValues", values);
-
-
-        
-      
-     
-
-     
-
+       console.log("clicked", ctx.modalOpen);
+        !ctx.user && ctx.setModalOpen(true)
 
       const innerValbj = {
         name: values.name,
@@ -71,7 +70,6 @@ const ContactUs = (props) => {
         user: ctx.user.user.id,
       }
       
-  
       const data = new FormData();
 
       for (let i = 0; i < values.media.length; i++) {
@@ -79,9 +77,8 @@ const ContactUs = (props) => {
       }
 
       data.append('data', JSON.stringify(innerValbj));
-
-
-
+     
+   
 
       if(ctx.user) {
         setMessage("pending")
@@ -118,22 +115,10 @@ const ContactUs = (props) => {
           setStatus('error')
         }
 
- 
-
-        
-      
-        
-        
-
-
       }
 
-      if (!ctx.user) {
-        ctx.setModalOpen(true)
-        
-      }
+   
       
-
     },
   });
 
@@ -151,7 +136,7 @@ const ContactUs = (props) => {
     }
 
   return (
-    <section id="#contact" >
+    <section id="#contact" ref={scrollCtx.contactRef} >
       {status && <Notification message={message} title={title} submitting={submitting} status={status} />}
       <div className="uk-tile-default">
         <h1 className="text-4xl ">
@@ -159,7 +144,30 @@ const ContactUs = (props) => {
         </h1>
         <div className=" pr-8 pt-8 pb-8">
           <p>
-            Submit your scary photo or contact us so we can investigate and get back to you.
+            {ctx.user ? "" : (<>
+            <a href="#" onClick={() => ctx.setModalOpen(true)}>
+              <span className="text-blue-500">
+                <i className="fas fa-user-circle"></i>
+              </span>
+              <span className="text-blue-500">
+                Login
+              </span>
+            </a>
+            <span className="text-black mr-2 ml-2">
+              or
+            </span>
+            <a href="#" onClick={() => { 
+              ctx.setModalOpen(true);
+              ctx.setRegistering(true);
+            }}>
+              <span className="text-blue-500">
+                <i className="fas fa-user-circle"></i>
+              </span>
+              <span className="text-blue-500">
+                Signup
+              </span>
+            </a>
+            </>)} to submit your scary photo or contact us so we can investigate and get back to you.
           </p>
           <form onSubmit={formik.handleSubmit}>
             <fieldset className="uk-fieldset pt-8">

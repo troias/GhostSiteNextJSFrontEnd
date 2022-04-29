@@ -30,7 +30,7 @@ const LoginForm = () => {
         }),
         onSubmit: values => {
             // alert(JSON.stringify(values, null, 2));
-            console.log("clicked")
+            // console.log("clicked")
             if (!ctx.registering) {
                 console.log("logging in");
                 ctx.loginUser(values.email, values.password);

@@ -18,10 +18,10 @@ import { fetchAPI } from "../lib/api"
 
 
 
-const Home = ({ articles, categories, homepage }) => {
+const Home = ({ articles, categories, homepage, investigations }) => {
 
   const ctx = useContext(AuthContext);
-
+  // console.log("homePageProps", homepage);
   // console.log("user", ctx.user);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Home = ({ articles, categories, homepage }) => {
 
   const [showModal, setShowModal] = useState(false);
 
-  console.log("showModal", showModal) 
+  // console.log("showModal", showModal) 
 
   return (
     <Layout showModal={setShowModal} categories={categories}>
@@ -46,7 +46,7 @@ const Home = ({ articles, categories, homepage }) => {
               <Hero herodata={homepage} /> 
                   <Modal show={showModal} onClose={setShowModal}/>
               <Articles articles={articles} />
-              <Investigations/>
+              <Investigations investigations={investigations}/>
               <AboutUs aboutData={homepage}/> 
               <ContactUs />
         
@@ -55,13 +55,15 @@ const Home = ({ articles, categories, homepage }) => {
         </div>
       </div>
     </Layout>
+ 
   )
 }
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const [articlesRes, categoriesRes, homepageRes] = await Promise.all([
+  const [articlesRes, categoriesRes, homepageRes, investigationsRes] = await Promise.all([
     fetchAPI("/articles", { populate: "*" }),
+  
     fetchAPI("/categories", { populate: "*" }),
     fetchAPI("/homepage", {
       populate: {
@@ -69,12 +71,15 @@ export async function getStaticProps() {
         seo: { populate: "*" },
 
       },
+      
     }),
+    fetchAPI("/investigations", { populate: "*" }),
   ])
 
   return {
     props: {
       articles: articlesRes.data,
+      investigations: investigationsRes.data,
       categories: categoriesRes.data,
       homepage: homepageRes.data,
     },

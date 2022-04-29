@@ -1,14 +1,37 @@
-import React, {useState, useContext, useEffect} from "react"
+import React, { useContext, useEffect, useState } from "react"
 import Link from "next/link"
-import AuthContext from "../context/authContext"
+import { ScrollContext } from "../context/scrollContext"
+import { AuthContext } from "../context/authContext";
 import NextImage from "../components/image"
 import Portal from "../components/portal"
 import Modal from "../components/modal"
 
 const Nav = ({ categories, showModal }) => {
 
-  const ctx = useContext(AuthContext);
+  const ctx = useContext(ScrollContext);
+  const authCtx = useContext(AuthContext);
+  const [isBrowser, setIsBrowser] = useState(false);
+
+
+ console.log("ctxUser", authCtx.user);
+
+  useEffect(() => {
+    setIsBrowser(true);
+
+   
+  }, [])
+
+  if (isBrowser) {
+    // console.log("navAboutRef", ctx.aboutRef);
   
+
+
+  } 
+  console.log("contactRef", ctx.contactRef)
+
+  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
+  const handleAboutClick = () => scrollToRef(ctx.aboutRef)
+  const handleContactClick = () => scrollToRef(ctx.contactRef)
 
 
 
@@ -19,7 +42,7 @@ const Nav = ({ categories, showModal }) => {
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav ">
             <ul className="uk-nav uk-navbar-dropdown-nav"></ul>
-            <li className="m-0">
+            <li className="m-0" >
               <Link href="/">
                 <a>TheNobodies</a>
               </Link>
@@ -30,14 +53,14 @@ const Nav = ({ categories, showModal }) => {
 
           <ul className="uk-navbar-nav hidden sm:flex">
 
-            <li className="">
-              <Link href="#about">
-                <a>About</a>
+            <li className="smoothscroll" onClick={handleAboutClick}>
+              <Link href="#About">
+                  About
               </Link>
             </li>
-            <li className="">
+            <li className="smoothscroll" onClick={handleContactClick}>
               <Link href="#contact">
-                <a>Contact</a>
+                Contact
               </Link>
             </li>
           </ul>
@@ -64,12 +87,12 @@ const Nav = ({ categories, showModal }) => {
               </div>
             </li>
             <li className="flex items-center">
-            {!ctx.user && <button class="uk-button uk-button-default uk-margin-small-right"
-            onClick={() => ctx.setModalOpen(true) }>Login</button>}
+            {!authCtx.user && <button class="uk-button uk-button-default uk-margin-small-right"
+            onClick={() => authCtx.setModalOpen(true) }>Login</button>}
 
 
-          { ctx.user &&  <button class="uk-button uk-button-default uk-margin-small-right"
-            onClick={() => ctx.logOutUser()}>Logout</button>}
+          { authCtx.user &&  <button class="uk-button uk-button-default uk-margin-small-right"
+            onClick={() => authCtx.logOutUser()}>Logout</button>}
 
                   
         

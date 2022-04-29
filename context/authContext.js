@@ -169,6 +169,7 @@ export const AuthProvider = (props) => {
         isLoading,
         modalOpen,
         registering,
+        setRegistering,
         toggleRegister, 
       }}
     >
