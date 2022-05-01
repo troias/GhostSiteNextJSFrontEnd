@@ -41,8 +41,11 @@ export const AuthProvider = (props) => {
   };
 
   const registerUser = async (username, email, password) => {
-    setLoading(true);
+
+    console.log("registerUserData", username, email, password);
+   
     try {
+      setLoading(true);
       const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/local/register`, {
         method: "POST",
         headers: {
@@ -64,6 +67,7 @@ export const AuthProvider = (props) => {
         setUser(data);
         setLoggedIn(true);
         setLoading(false);
+        setModalOpen(false);
         // console.log("login", data)
         return data;
       }
@@ -73,12 +77,14 @@ export const AuthProvider = (props) => {
 
       if (data.error.message) {
         setError(data.error.message);
+        setLoading(false);
         // console.log("returned", data.error.message);
         return data.error;
       }
 
 
     } catch (error) {
+      setLoading(false);
       setError("error" + error)
     }
 
@@ -140,23 +146,29 @@ export const AuthProvider = (props) => {
   };
 
   const lostPassword = async (email) => {
-    setLoading(true);
+    console.log("lostPassord", email);
+   
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/local/forgot-password`, {
+      setLoading(true);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/forgot-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email,
+          url: 'http://localhost:1337',
+    
         },
         ),
       });
       const data = await response.json();
-      // console.log("lostPassword", data)
-      if (data.error.message) {
-        setError(data.error.message);
-        // console.log("returned", data.error.message);
+       console.log("lostPasswordInnerData", data)
+      if (data.error) {
+      
+        setError(data.error);
+        setLoading(false);
+         console.log("returned", data.error);
         return data.error;
       }
       // console.log("login", data)
@@ -168,9 +180,11 @@ export const AuthProvider = (props) => {
     } catch (error) {
       // console.log("error", error);
       setError("something went wrong" + error);
+      setLoading(false)
+      console.log("lostPassData", error);
       return error
     }
-
+  
   };
 
 

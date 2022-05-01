@@ -18,7 +18,9 @@ import { fetchAPI } from "../lib/api"
 
 
 
-const Home = ({ articles, categories, homepage, investigations }) => {
+const Home = ({ articles, categories, homepage, investigations, global }) => {
+
+  console.log("globalData", global);
 
   const ctx = useContext(AuthContext);
   // console.log("homePageProps", homepage);
@@ -61,19 +63,31 @@ const Home = ({ articles, categories, homepage, investigations }) => {
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const [articlesRes, categoriesRes, homepageRes, investigationsRes] = await Promise.all([
+  const [articlesRes, categoriesRes, homepageRes, investigationsRes, globalRes] = await Promise.all([
     fetchAPI("/articles", { populate: "*" }),
   
     fetchAPI("/categories", { populate: "*" }),
+ 
     fetchAPI("/homepage", {
       populate: {
         hero: { populate: "*" },
+        about: { populate: "*" },
+       
+
         seo: { populate: "*" },
 
       },
       
     }),
     fetchAPI("/investigations", { populate: "*" }),
+    fetchAPI("/global", {
+      populate: {
+        favicon: "*",
+        footer: {
+          populate: "*",
+        },
+      },
+    }),
   ])
 
   return {
@@ -82,6 +96,8 @@ export async function getStaticProps() {
       investigations: investigationsRes.data,
       categories: categoriesRes.data,
       homepage: homepageRes.data,
+      global: globalRes.data,
+
     },
     revalidate: 1,
   }
