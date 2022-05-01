@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import AuthContext from '../context/authContext';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import lostPassword from './lostPassword';
 
 const LoginForm = () => {
 
@@ -18,7 +19,7 @@ const LoginForm = () => {
         },
         validationSchema: Yup.object({
             username: Yup.string(),
-               
+
             email: Yup.string()
                 .email('Invalid email address')
                 .required('Required'),
@@ -28,15 +29,21 @@ const LoginForm = () => {
                 .min(8, 'Password is too short - should be 8 chars minimum.')
                 .matches(/(?=.*[0-9])/, 'Password must contain a number.'),
         }),
-        onSubmit: values => {
+        onSubmit: async values => {
             // alert(JSON.stringify(values, null, 2));
-            // console.log("clicked")
+            console.log("clicked")
             if (!ctx.registering) {
                 console.log("logging in");
                 ctx.loginUser(values.email, values.password);
             }
             if (ctx.registering) {
+                console.log("registering");
                 ctx.registerUser(values.email, values.password);
+            }
+            if (ctx.isLostPassword) {
+                console.log("Testing lost password");
+                console.log("isLostPassword", ctx.isLostPassword);
+                ctx.lostPassword(values.email);
             }
 
         },
@@ -45,9 +52,11 @@ const LoginForm = () => {
 
 
 
+
     const loginButton = (
         <button
             type="submit"
+
             className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Login to your account
         </button>)
@@ -59,13 +68,18 @@ const LoginForm = () => {
             Register  to your account </button>
     )
 
+    const lostPasswordButton = (
+        <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            Submit to recover password </button>
+    )
+
 
 
     return (
         <form className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" onSubmit={formik.handleSubmit}>
 
 
-            <h3 className="text-xl font-medium text-gray-900 dark:text-white">{!ctx.registering ? "Login to our platform": "Register to out platform"}</h3>
+            <h3 className="text-xl font-medium text-gray-900 dark:text-white">{ctx.isLostPassword ? "Please submit if you forgot password" : (!ctx.registering ? "Login to our platform" : "Register to out platform")}</h3>
 
             {ctx.registering && <div>
                 <label htmlfor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
@@ -98,7 +112,7 @@ const LoginForm = () => {
                     <div>{formik.errors.email}</div>
                 ) : null}
             </div>
-            <div>
+            {!ctx.isLostPassword && <div>
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Your password</label>
                 <input
                     type="password"
@@ -112,26 +126,20 @@ const LoginForm = () => {
                 {formik.touched.password && formik.errors.password ? (
                     <div>{formik.errors.password}</div>
                 ) : null}
-            </div>
+            </div>}
             <div className="flex justify-between">
 
-                <a href="#" className="text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
+                <a href="#" className="text-sm text-blue-700 hover:underline dark:text-blue-500" onClick={() => ctx.setIsLostPassword(true)}>{!ctx.isLostPassword && "Lost Password?"}</a>
             </div>
-
-          
-
-            {!ctx.registering && loginButton}
-         
-            {ctx.registering && registerButton}
-          
+            {/* {ctx.isLostPassword &&  lostPasswordButton} */}
+            {ctx.isLostPassword ? lostPasswordButton : (ctx.registering ? registerButton : loginButton)}
+            {/* {!ctx.registering && !ctx.isLostPassword && loginButton}
+                    {ctx.registering && registerButton} */}
 
 
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-                {!ctx.registering ? "Not registered" : "Already registered?"} <a className="text-blue-700 hover:underline dark:text-blue-500" onClick={ctx.toggleRegister}>{!ctx.registering? "Create account" : "Log in"}</a>
+                {!ctx.registering ? "Not registered" : "Already registered?"} <a className="text-blue-700 hover:underline dark:text-blue-500" onClick={ ctx.toggleRegister }>{!ctx.registering ? "Create account" : "Log in"} </a>
             </div>
-
-
-
         </form>
     )
 }

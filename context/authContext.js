@@ -16,6 +16,7 @@ export const AuthProvider = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [loggingIn, setLoggingIn] = useState(false);
   const [registering, setRegistering] = useState(false);
+  const [isLostPassword, setIsLostPassword] = useState(false);
  
 
   // console.log("userLogin", user)
@@ -24,6 +25,7 @@ export const AuthProvider = (props) => {
       
     setRegistering(!registering);
     setLoggingIn(false);
+    isLostPassword && setIsLostPassword(false);
 };
 
 
@@ -39,7 +41,7 @@ export const AuthProvider = (props) => {
   };
 
   const registerUser = async (username, email, password) => {
-    setIsLoading(true);
+    setLoading(true);
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/local/register`, {
         method: "POST",
@@ -61,7 +63,7 @@ export const AuthProvider = (props) => {
 
         setUser(data);
         setLoggedIn(true);
-        setIsLoading(false);
+        setLoading(false);
         // console.log("login", data)
         return data;
       }
@@ -137,6 +139,41 @@ export const AuthProvider = (props) => {
 
   };
 
+  const lostPassword = async (email) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/local/forgot-password`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+        },
+        ),
+      });
+      const data = await response.json();
+      // console.log("lostPassword", data)
+      if (data.error.message) {
+        setError(data.error.message);
+        // console.log("returned", data.error.message);
+        return data.error;
+      }
+      // console.log("login", data)
+      setSuccess(true);
+      setModalOpen(false);
+      setLoading(false)
+      console.log("lostPassData", data);
+      return data;
+    } catch (error) {
+      // console.log("error", error);
+      setError("something went wrong" + error);
+      return error
+    }
+
+  };
+
+
   const checkIsLoggedIn = () => {
     if (isLoggedIn) {
       return true;
@@ -171,6 +208,9 @@ export const AuthProvider = (props) => {
         registering,
         setRegistering,
         toggleRegister, 
+        setIsLostPassword,
+        isLostPassword,
+        lostPassword
       }}
     >
       {props.children}

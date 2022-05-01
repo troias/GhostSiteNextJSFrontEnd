@@ -8,6 +8,7 @@ const AuthNotificationModal = () => {
     const ctx = useContext(AuthContext);
 
     const isLoading = ctx.isLoading;
+    console.log("isLoading", isLoading);
     const error = ctx.error;
     const success = ctx.success;
 

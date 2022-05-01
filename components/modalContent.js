@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 import AuthContext from '../context/authContext';
 import LoginForm from './loginForm';
 import AuthNotificationModal from './authNotificationModal';
+import lostPassword from './lostPassword';
+
 
 const ModalContent = ({ onClose }) => {
 
