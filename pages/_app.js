@@ -18,6 +18,8 @@ export const GlobalContext = createContext({})
 const MyApp = ({ Component, pageProps, categories }) => {
   const [showModal, setShowModal] = useState(false);
   const { global } = pageProps
+  const footerData = global.attributes.footer
+  console.log("footerDataApp", global);
 
   return (
     <>
@@ -30,8 +32,9 @@ const MyApp = ({ Component, pageProps, categories }) => {
       <GlobalContext.Provider value={global.attributes}>
         <AuthProvider>
           <ScrollProvider>
-          <Layout showModal={setShowModal} categories={categories} >
+          <Layout showModal={setShowModal} categories={categories} footer={footerData} >
         <Component {...pageProps} />
+        
         </Layout>
         </ScrollProvider>
         </AuthProvider>
@@ -52,6 +55,9 @@ MyApp.getInitialProps = async (ctx) => {
     populate: {
       favicon: "*",
       defaultSeo: {
+        populate: "*",
+      },
+      footer: {
         populate: "*",
       },
     },

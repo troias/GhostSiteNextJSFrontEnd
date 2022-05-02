@@ -19,8 +19,8 @@ import { getStrapiMedia } from '../../lib/media'
 
   // console.log("investigation", investigation);
   return (
-    <Layout categories={categories.data}>
-    <Seo seo={seo} />
+   
+    <> 
     <div
       id="banner"
       className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
@@ -28,6 +28,7 @@ import { getStrapiMedia } from '../../lib/media'
       data-srcset={imageUrl}
       data-uk-img
     >
+       <Seo seo={seo} />
       <h1>{investigation.attributes.title}</h1>
     </div>
     <div className="uk-section">
@@ -52,7 +53,8 @@ import { getStrapiMedia } from '../../lib/media'
         </div>
       </div>
     </div>
-  </Layout>
+    </>
+  
   )
 }
 

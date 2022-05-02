@@ -106,6 +106,7 @@ const Nav = ({ categories, showModal }) => {
             <li className="flex items-center">
             {!authCtx.user && <button class="uk-button uk-button-default uk-margin-small-right"
             onClick={() => authCtx.setModalOpen(true) }>Login</button>}
+            {console.log("authctx", authCtx.modalOpen)}
 
 
           { authCtx.user &&  <button class="uk-button uk-button-default uk-margin-small-right"
