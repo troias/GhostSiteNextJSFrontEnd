@@ -4,17 +4,34 @@ import {BsInstagram}  from 'react-icons/bs'
 import {AiOutlineFacebook} from 'react-icons/ai'
 import {TiSocialTwitterCircular} from 'react-icons/ti'
 import {AiOutlineYoutube} from 'react-icons/ai'
-
+import { useRouter } from 'next/router'
 
  const AboutUs = ({aboutData}) => {
    const {about} = aboutData.attributes
    const ctx = useContext(ScrollContext);
   
-
+    const router = useRouter();
   
 
+  console.log("social", about.social_links[0].url);
+  
+  useEffect(() => {
+     
+    if (ctx.aboutRef.current) {
+      if (router.asPath === "/#About") {
+  
+        ctx.aboutRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+    }
+
+   
 
 
+  }, []);
  
 
   return (
@@ -36,16 +53,16 @@ import {AiOutlineYoutube} from 'react-icons/ai'
       <div className="uk-text-center  w-full flex justify-around md:w-2/3 p-8">
        
 
-          <a href={""} target="_blank" rel="noopener noreferrer">
+          <a href={about.social_links[0].url}  rel="noopener noreferrer">
               <BsInstagram size={50}/>
              </a>
-              <a href={""} target="_blank" rel="noopener noreferrer">
+              <a href={about.social_links[1].url} target="_blank" rel="noopener noreferrer">
               <AiOutlineFacebook size={50}/>
                </a>
-               <a href={""} target="_blank" rel="noopener noreferrer">
+               <a href={about.social_links[2].url} target="_blank" rel="noopener noreferrer">
               <TiSocialTwitterCircular size={50}/>
                </a>
-               <a href={""} target="_blank" rel="noopener noreferrer">
+               <a href={about.social_links[3].url} target="_blank" rel="noopener noreferrer">
               <AiOutlineYoutube size={50}/>
                </a>
       </div>

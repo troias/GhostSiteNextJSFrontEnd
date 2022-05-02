@@ -15,16 +15,17 @@ const Category = ({ category, categories }) => {
 
     console.log("category details", category)
   return (
-    <Layout categories={categories.data}>
-      <Seo seo={seo} />
+    // <Layout categories={categories.data}>
+   
       <div className="uk-section">
+           <Seo seo={seo} />
         <div className="uk-container uk-container-large">
           <h1>{category.attributes.name}</h1>
           { articles.length > 0 && <Articles articles={category.attributes.articles.data} />}
            { investigations.length > 0 && <Investigations investigations={category.attributes.investigations.data} />} 
         </div>
       </div>
-    </Layout>
+    // </Layout>
   )
 }
 

@@ -8,7 +8,7 @@ export const ScrollProvider = (props) => {
 
      const contactRef = useRef(null);
    
-    
+    console.log("contactRef", contactRef)
     
 
     

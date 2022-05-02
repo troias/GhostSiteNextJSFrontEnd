@@ -20,8 +20,8 @@ import { fetchAPI } from "../lib/api"
 
 const Home = ({ articles, categories, homepage, investigations, global }) => {
 
-  console.log("globalData", global);
-
+  console.log("globalData", global.attributes.footer);
+  const footerData = global.attributes.footer;
   const ctx = useContext(AuthContext);
   // console.log("homePageProps", homepage);
   // console.log("user", ctx.user);
@@ -40,9 +40,10 @@ const Home = ({ articles, categories, homepage, investigations, global }) => {
   // console.log("showModal", showModal) 
 
   return (
-    <Layout showModal={setShowModal} categories={categories}>
-      <Seo seo={homepage.attributes.seo} />
+  
+   
       <div className=" ">
+           <Seo seo={homepage.attributes.seo} />
         <div className="pl-8 pr-8 ">
           <div className="article-section pt-8  ">
               <Hero herodata={homepage} /> 
@@ -56,14 +57,14 @@ const Home = ({ articles, categories, homepage, investigations, global }) => {
           </div>
         </div>
       </div>
-    </Layout>
+
  
   )
 }
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const [articlesRes, categoriesRes, homepageRes, investigationsRes, globalRes] = await Promise.all([
+  const [articlesRes, categoriesRes, homepageRes, investigationsRes] = await Promise.all([
     fetchAPI("/articles", { populate: "*" }),
   
     fetchAPI("/categories", { populate: "*" }),
@@ -80,14 +81,7 @@ export async function getStaticProps() {
       
     }),
     fetchAPI("/investigations", { populate: "*" }),
-    fetchAPI("/global", {
-      populate: {
-        favicon: "*",
-        footer: {
-          populate: "*",
-        },
-      },
-    }),
+
   ])
 
   return {
@@ -96,7 +90,7 @@ export async function getStaticProps() {
       investigations: investigationsRes.data,
       categories: categoriesRes.data,
       homepage: homepageRes.data,
-      global: globalRes.data,
+     
 
     },
     revalidate: 1,

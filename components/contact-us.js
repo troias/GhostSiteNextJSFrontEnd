@@ -1,9 +1,10 @@
-import React, {useRef, useState, useContext} from 'react'
+import React, {useRef, useState, useContext, useEffect} from 'react'
 import AuthContext from "../context/authContext";
 import {ScrollContext} from "../context/scrollContext";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Notification from "../components/notification";
+import router from 'next/router';
 
 const ContactUs = (props) => {
 
@@ -134,6 +135,26 @@ const ContactUs = (props) => {
       setFileArr(fileArray);
         // console.log("firstFile", fileArray);
     }
+
+    useEffect(() => {
+     
+      if (scrollCtx.contactRef.current) {
+        if (router.asPath === "/#Contact") {
+    
+        scrollCtx.contactRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+      }
+ 
+     
+ 
+      console.log("scrollCtx", scrollCtx.contactRef);
+      console.log("aboutRef", scrollCtx.aboutRef);
+
+    }, []);
 
   return (
     <section id="#contact" ref={scrollCtx.contactRef} >

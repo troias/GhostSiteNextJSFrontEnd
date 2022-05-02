@@ -5,38 +5,39 @@ import {TiSocialTwitterCircular} from 'react-icons/ti'
 import {AiOutlineYoutube} from 'react-icons/ai'
 import { useRouter } from 'next/router'
 
- const Footer = () => {
+ const Footer = (props) => {
   const router = useRouter()
   const isHome = router.pathname === '/'
+  console.log("footerData", props);
 
 
   return (
     <div className="uk-container border-t-2 ">
         <div className="uk-text-center pb-8 pt-8 ">
           <p className="text-xl">
-            Follow us on social media
+           {/* {data.message} */}
           </p>
           <div className="flex justify-center mt-4">
 
-            <a href="https://www.facebook/the_nobodies/" target="_blank" rel="noopener noreferrer">
+            {/* <a href={data.footer_social_links[0].url} target="_blank" rel="noopener noreferrer">
           <AiOutlineFacebook className="text-2xl mr-4" />
             </a>
-            <a href="https://twitter.com/the_nobodies" target="_blank" rel="noopener noreferrer">
+            <a href={data.footer_social_links[0].url} target="_blank" rel="noopener noreferrer">
           <TiSocialTwitterCircular className="text-2xl mr-4" />
             </a>
-            <a href="https://www.youtube.com/channel/UC-lQlZJWLhj4_JYXw8Zjz1w" target="_blank" rel="noopener noreferrer">
+            <a href={data.footer_social_links[0].url} target="_blank" rel="noopener noreferrer">
           <AiOutlineYoutube className="text-2xl mr-4" />
             </a>
-            <a href="https://www.instagram.com/the_nobodies/" target="_blank" rel="noopener noreferrer">
+            <a href={data.footer_social_links[0].url} target="_blank" rel="noopener noreferrer">
           <BsInstagram className="text-2xl mr-4" />
-            </a>
+            </a> */}
           </div>
           
      
         </div>
         <div className="uk-text-center pb-4">
         <p className="text-sm">
-        © 2022 TheNobodies. All rights reserved.
+       {/* {data.copyright_text} */}
         </p>
         </div>
 
@@ -47,3 +48,4 @@ import { useRouter } from 'next/router'
 }
 
 export default Footer
+

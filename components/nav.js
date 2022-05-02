@@ -5,12 +5,25 @@ import { AuthContext } from "../context/authContext";
 import NextImage from "../components/image"
 import Portal from "../components/portal"
 import Modal from "../components/modal"
+import { useRouter } from "next/router";
 
 const Nav = ({ categories, showModal }) => {
 
   const ctx = useContext(ScrollContext);
   const authCtx = useContext(AuthContext);
+
   const [isBrowser, setIsBrowser] = useState(false);
+  const router = useRouter();
+
+  console.log("routerPath", router.asPath)
+
+  const contactLink = (
+    <Link href="/contact-us">
+      <a className="text-white text-lg font-bold hover:text-gray-900">
+        Contact Us
+      </a>
+    </Link>
+  );
 
 
  console.log("ctxUser", authCtx.user);
@@ -28,8 +41,12 @@ const Nav = ({ categories, showModal }) => {
 
   } 
   console.log("contactRef", ctx.contactRef)
+  console.log("aboutRef", ctx.aboutRef)
 
-  const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop)
+  
+
+
+  const scrollToRef = (ref) => ref.current && ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
   const handleAboutClick = () => scrollToRef(ctx.aboutRef)
   const handleContactClick = () => scrollToRef(ctx.contactRef)
 
@@ -53,13 +70,13 @@ const Nav = ({ categories, showModal }) => {
 
           <ul className="uk-navbar-nav hidden sm:flex">
 
-            <li className="smoothscroll" onClick={handleAboutClick}>
-              <Link href="#About">
+            <li className="smoothscroll" onClick={ctx.aboutRef.current && handleAboutClick}>
+              <Link href={router.asPath === '/' ? '#About' : '/#About'}>
                   About
               </Link>
             </li>
-            <li className="smoothscroll" onClick={handleContactClick}>
-              <Link href="#contact">
+            <li className="smoothscroll" onClick={ctx.contactRef.current  && handleContactClick}>
+              <Link href={router.asPath === '/' ? '#Contact' : '/#Contact'}>
                 Contact
               </Link>
             </li>
