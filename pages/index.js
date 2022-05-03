@@ -47,7 +47,7 @@ const Home = ({ articles, categories, homepage, investigations, global }) => {
         <div className="pl-8 pr-8 ">
           <div className="article-section pt-8  ">
               <Hero herodata={homepage} /> 
-                  <Modal show={showModal} onClose={setShowModal}/>
+                
               <Articles articles={articles} />
               <Investigations investigations={investigations}/>
               <AboutUs aboutData={homepage}/> 
