@@ -20,9 +20,10 @@ import { fetchAPI } from "../lib/api"
 
 const Home = ({ articles, categories, homepage, investigations, global }) => {
 
-  console.log("globalData", global.attributes.footer);
+  // console.log("globalData", global.attributes.footer);
   const footerData = global.attributes.footer;
   const ctx = useContext(AuthContext);
+  console.log("homepagedata", homepage,);
   // console.log("homePageProps", homepage);
   // console.log("user", ctx.user);
 

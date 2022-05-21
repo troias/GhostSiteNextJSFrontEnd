@@ -77,14 +77,24 @@ export const AuthProvider = (props) => {
 
       if (data.error.message) {
         setError(data.error.message);
-        setLoading(false);
+
+        const timeout = setTimeout(() => {
+          setLoading(false);
+          
+          clearTimeout(timeout);
+        }, 3000);
+       
         // console.log("returned", data.error.message);
         return data.error;
       }
 
 
     } catch (error) {
-      setLoading(false);
+      const timeout = setTimeout(() => {
+        setLoading(false);
+        
+        clearTimeout(timeout);
+      }, 3000);
       setError("error" + error)
     }
 
@@ -118,7 +128,7 @@ export const AuthProvider = (props) => {
         setLoggedIn(true);
         setSuccess(true);
         setModalOpen(false);
-        console.log("login", data)
+        // console.log("login", data)
         return data;
       }
 
@@ -127,6 +137,13 @@ export const AuthProvider = (props) => {
 
       if (data.error.message) {
         setError(data.error.message);
+        const timeout = setTimeout(() => {
+          setLoading(false);
+          
+          clearTimeout(timeout);
+        }, 3000);
+
+       
         // console.log("returned", data.error.message);
         return data.error;
       }
@@ -140,13 +157,20 @@ export const AuthProvider = (props) => {
     } catch (error) {
       // console.log("error", error);
       setError("something went wrong" + error);
+      const timeout = setTimeout(() => {
+        setLoading(false);
+       
+        clearTimeout(timeout);
+      }, 3000);
+
+     
       return error
     }
 
   };
 
   const lostPassword = async (email) => {
-    console.log("lostPassord", email);
+    // console.log("lostPassord", email);
    
     try {
       setLoading(true);
@@ -157,31 +181,44 @@ export const AuthProvider = (props) => {
         },
         body: JSON.stringify({
           email,
-          url: 'http://localhost:1337',
-    
+        
         },
         ),
       });
       const data = await response.json();
-       console.log("lostPasswordInnerData", data)
+      
+
       if (data.error) {
       
         setError(data.error);
+        const timeout = setTimeout(() => {
+
         setLoading(false);
-         console.log("returned", data.error);
+        clearTimeout(timeout);
+        }, 1500);
+
+         console.log("lostPasswordInnerDataError", data.error);
         return data.error;
       }
+
       // console.log("login", data)
       setSuccess(true);
       setModalOpen(false);
       setLoading(false)
       console.log("lostPassData", data);
       return data;
+
+
     } catch (error) {
       // console.log("error", error);
+      const timeout = setTimeout(() => {
+        setLoading(false);
+        clearTimeout(timeout)
+      }, 1500);
+
       setError("something went wrong" + error);
-      setLoading(false)
       console.log("lostPassData", error);
+
       return error
     }
   
