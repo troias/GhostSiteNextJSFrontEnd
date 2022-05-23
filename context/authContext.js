@@ -170,7 +170,7 @@ export const AuthProvider = (props) => {
   };
 
   const lostPassword = async (email) => {
-    // console.log("lostPassord", email);
+     console.log("lostPassord", email);
    
     try {
       setLoading(true);
@@ -185,8 +185,8 @@ export const AuthProvider = (props) => {
         },
         ),
       });
-      const data = await response.json();
       
+      const data = await response.json();
 
       if (data.error) {
       
@@ -201,11 +201,20 @@ export const AuthProvider = (props) => {
         return data.error;
       }
 
+      
+
       // console.log("login", data)
+      const timeout = setTimeout(() => {
+        setLoading(false);
+        clearTimeout(timeout)
+      }, 1500);
+
+      setIsLostPassword(false)
       setSuccess(true);
       setModalOpen(false);
-      setLoading(false)
+      
       console.log("lostPassData", data);
+
       return data;
 
 

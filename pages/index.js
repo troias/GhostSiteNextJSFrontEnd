@@ -35,6 +35,17 @@ const Home = ({ articles, categories, homepage, investigations, global }) => {
 
   }, [])
 
+  const featuredArticles = articles.filter(article => article.attributes.featured === "featured");
+  const featuredInvestigations = investigations.filter(investigation => {
+    return investigation.attributes.featured === "featured"
+    console.log("investigation", investigation);
+  });
+
+  console.log("featuredInvestigations", featuredInvestigations);
+  console.log("featuredArticles", featuredArticles);
+  console.log("articles"  , articles);
+
+
 
   const [showModal, setShowModal] = useState(false);
 
@@ -49,8 +60,8 @@ const Home = ({ articles, categories, homepage, investigations, global }) => {
           <div className="article-section pt-8  ">
               <Hero herodata={homepage} /> 
                 
-              <Articles articles={articles} />
-              <Investigations investigations={investigations}/>
+              <Articles articles={featuredArticles} />
+              <Investigations investigations={featuredInvestigations}/>
               <AboutUs aboutData={homepage}/> 
               <ContactUs />
         
