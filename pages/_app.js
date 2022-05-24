@@ -19,7 +19,7 @@ const MyApp = ({ Component, pageProps, categories }) => {
   const [showModal, setShowModal] = useState(false);
   const { global } = pageProps
   const footerData = global.attributes.footer
-  console.log("footerDataApp", global);
+  // console.log("footerDataApp", global);
 
   return (
     <>

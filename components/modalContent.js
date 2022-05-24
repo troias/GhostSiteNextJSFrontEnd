@@ -16,12 +16,13 @@ const ModalContent = ({ onClose }) => {
     const handleCloseClick = (e) => {
         e.preventDefault()
         ctx.setModalOpen(false);
+        ctx.setIsLostPassword(false)
     };
 
 
     return (
         <>
-            <div id="authentication-modal"  aria-hidden="true" className=" flex justify-center items-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full bg-black bg-opacity-50 " >
+            <div id="authentication-modal"   className=" flex justify-center items-center overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full bg-black bg-opacity-50 " >
                 <div className="relative p-4 w-full max-w-md h-full md:h-auto" >
                     {/* <!-- Modal content --> */}
                     <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">

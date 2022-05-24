@@ -4,7 +4,7 @@ import Layout from "../../components/layout"
 import Seo from "../../components/seo"
 import Investigations from '../../components/investigations'
 
-const Category = ({ category, categories }) => {
+const Category = ({ category }) => {
   const seo = {
     metaTitle: category.attributes.name,
     metaDescription: `All ${category.attributes.name} articles`,
@@ -13,7 +13,7 @@ const Category = ({ category, categories }) => {
   const articles = category.attributes.articles.data
   const investigations = category.attributes.investigations.data
 
-    console.log("category details", category)
+    // console.log("category details", category)
   return (
     // <Layout categories={categories.data}>
    

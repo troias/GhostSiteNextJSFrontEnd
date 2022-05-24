@@ -12,7 +12,7 @@ const ContactUs = (props) => {
   const scrollCtx = useContext(ScrollContext);
 
  
-  console.log("ContactUser", ctx.user)
+  // console.log("ContactUser", ctx.user)
 
 
   // const parsedData = JSON.parse(ctx.user);
@@ -61,7 +61,7 @@ const ContactUs = (props) => {
         .required('Required')
     }),
     onSubmit: async values => {
-       console.log("clicked", ctx.modalOpen);
+      //  console.log("clicked", ctx.modalOpen);
         !ctx.user && ctx.setModalOpen(true)
 
       const innerValbj = {
@@ -151,8 +151,8 @@ const ContactUs = (props) => {
  
      
  
-      console.log("scrollCtx", scrollCtx.contactRef);
-      console.log("aboutRef", scrollCtx.aboutRef);
+      // console.log("scrollCtx", scrollCtx.contactRef);
+      // console.log("aboutRef", scrollCtx.aboutRef);
 
     }, []);
 

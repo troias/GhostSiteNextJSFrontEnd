@@ -42,7 +42,7 @@ export const AuthProvider = (props) => {
 
   const registerUser = async (username, email, password) => {
 
-    console.log("registerUserData", username, email, password);
+    // console.log("registerUserData", username, email, password);
    
     try {
       setLoading(true);
@@ -79,7 +79,7 @@ export const AuthProvider = (props) => {
         setError(data.error.message);
 
         const timeout = setTimeout(() => {
-          setLoading(false);
+        
           
           clearTimeout(timeout);
         }, 3000);
@@ -95,6 +95,7 @@ export const AuthProvider = (props) => {
         
         clearTimeout(timeout);
       }, 3000);
+
       setError("error" + error)
     }
 
@@ -122,12 +123,14 @@ export const AuthProvider = (props) => {
       // console.log("Logindata", data)
 
       if (data.user) {
+
         localStorage.setItem("user", JSON.stringify(data));
         setLoading(false);
         setUser(data);
         setLoggedIn(true);
         setSuccess(true);
         setModalOpen(false);
+
         // console.log("login", data)
         return data;
       }
@@ -137,6 +140,8 @@ export const AuthProvider = (props) => {
 
       if (data.error.message) {
         setError(data.error.message);
+
+
         const timeout = setTimeout(() => {
           setLoading(false);
           
@@ -170,10 +175,11 @@ export const AuthProvider = (props) => {
   };
 
   const lostPassword = async (email) => {
-     console.log("lostPassord", email);
+    //  console.log("lostPassord", email);
    
     try {
       setLoading(true);
+
       const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/forgot-password`, {
         method: "POST",
         headers: {
@@ -197,23 +203,25 @@ export const AuthProvider = (props) => {
         clearTimeout(timeout);
         }, 1500);
 
-         console.log("lostPasswordInnerDataError", data.error);
+          console.log("lostPasswordInnerDataError", data.error);
         return data.error;
       }
 
       
 
       // console.log("login", data)
-      const timeout = setTimeout(() => {
-        setLoading(false);
-        clearTimeout(timeout)
-      }, 1500);
+   
 
       setIsLostPassword(false)
       setSuccess(true);
       setModalOpen(false);
       
-      console.log("lostPassData", data);
+      const timeout = setTimeout(() => {
+        setLoading(false);
+        clearTimeout(timeout)
+      
+      }, 1500);
+      // console.log("lostPassData", data);
 
       return data;
 
@@ -226,7 +234,7 @@ export const AuthProvider = (props) => {
       }, 1500);
 
       setError("something went wrong" + error);
-      console.log("lostPassData", error);
+      // console.log("lostPassData", error);
 
       return error
     }
@@ -243,12 +251,12 @@ export const AuthProvider = (props) => {
     }
   };
 
-  useEffect(() => {
-    checkIsLoggedIn()
-    return () => {
-    }
+  // useEffect(() => {
+  //   checkIsLoggedIn()
+  //   return () => {
+  //   }
 
-  }, [user])
+  // }, [user])
 
   return (
     <AuthContext.Provider

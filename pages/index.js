@@ -23,7 +23,7 @@ const Home = ({ articles, categories, homepage, investigations, global }) => {
   // console.log("globalData", global.attributes.footer);
   const footerData = global.attributes.footer;
   const ctx = useContext(AuthContext);
-  console.log("homepagedata", homepage,);
+  // console.log("homepagedata", homepage,);
   // console.log("homePageProps", homepage);
   // console.log("user", ctx.user);
 
@@ -38,12 +38,12 @@ const Home = ({ articles, categories, homepage, investigations, global }) => {
   const featuredArticles = articles.filter(article => article.attributes.featured === "featured");
   const featuredInvestigations = investigations.filter(investigation => {
     return investigation.attributes.featured === "featured"
-    console.log("investigation", investigation);
+  
   });
 
-  console.log("featuredInvestigations", featuredInvestigations);
-  console.log("featuredArticles", featuredArticles);
-  console.log("articles"  , articles);
+  // console.log("featuredInvestigations", featuredInvestigations);
+  // console.log("featuredArticles", featuredArticles);
+  // console.log("articles"  , articles);
 
 
 

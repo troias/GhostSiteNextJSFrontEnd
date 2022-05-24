@@ -20,7 +20,7 @@ import { getStrapiMedia } from '../../lib/media'
   // console.log("investigation", investigation);
   return (
    
-    <> 
+    <div> 
     <div
       id="banner"
       className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
@@ -53,7 +53,7 @@ import { getStrapiMedia } from '../../lib/media'
         </div>
       </div>
     </div>
-    </>
+    </div>
   
   )
 }

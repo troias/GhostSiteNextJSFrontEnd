@@ -12,36 +12,31 @@ const Nav = ({ categories, showModal }) => {
   const ctx = useContext(ScrollContext);
   const authCtx = useContext(AuthContext);
 
-  const [isBrowser, setIsBrowser] = useState(false);
+  // const [isBrowser, setIsBrowser] = useState(false);
   const router = useRouter();
 
-  console.log("routerPath", router.asPath)
+  // console.log("routerPath", router.asPath)
 
-  const contactLink = (
-    <Link href="/contact-us">
-      <a className="text-white text-lg font-bold hover:text-gray-900">
-        Contact Us
-      </a>
-    </Link>
-  );
+  // const contactLink = (
+  //   <Link href="/contact-us">
+  //     <a className="text-white text-lg font-bold hover:text-gray-900">
+  //       Contact Us
+  //     </a>
+  //   </Link>
+  // );
 
 
- console.log("ctxUser", authCtx.user);
+//  console.log("ctxUser", authCtx.user);
 
-  useEffect(() => {
-    setIsBrowser(true);
+  // useEffect(() => {
+  //   setIsBrowser(true);
 
    
-  }, [])
-
-  if (isBrowser) {
-    // console.log("navAboutRef", ctx.aboutRef);
-  
+  // }, [])
 
 
-  } 
-  console.log("contactRef", ctx.contactRef)
-  console.log("aboutRef", ctx.aboutRef)
+  // console.log("contactRef", ctx.contactRef)
+  // console.log("aboutRef", ctx.aboutRef)
 
   
 
@@ -53,7 +48,7 @@ const Nav = ({ categories, showModal }) => {
 
 
   return (
-    <>
+
     <div>
       <nav className="uk-navbar-container flex pl-10 pr-4" data-uk-navbar>
         <div className="uk-navbar-left">
@@ -93,7 +88,7 @@ const Nav = ({ categories, showModal }) => {
 
 
                         <Link href={`/category/${category.attributes.slug}`}>
-                          <a className="uk-link-reset">{category.attributes.name}</a>
+                          <a >{category.attributes.name}</a>
                         </Link>
 
                       </li>
@@ -104,12 +99,12 @@ const Nav = ({ categories, showModal }) => {
               </div>
             </li>
             <li className="flex items-center">
-            {!authCtx.user && <button class="uk-button uk-button-default uk-margin-small-right"
+            {!authCtx.user && <button className="uk-button uk-button-default uk-margin-small-right"
             onClick={() => authCtx.setModalOpen(true) }>Login</button>}
-            {console.log("authctx", authCtx.modalOpen)}
+         
 
 
-          { authCtx.user &&  <button class="uk-button uk-button-default uk-margin-small-right"
+          { authCtx.user &&  <button className="uk-button uk-button-default uk-margin-small-right"
             onClick={() => authCtx.logOutUser()}>Logout</button>}
 
                   
@@ -124,7 +119,7 @@ const Nav = ({ categories, showModal }) => {
    
     </div>
 
-     </>
+  
   )
 }
 

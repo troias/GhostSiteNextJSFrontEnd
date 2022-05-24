@@ -7,7 +7,7 @@ import classes from './notification.module.css';
 function Notification(props) {
   const { title, message, status, submitting } = props;
 
-  // console.log("notification status", props);
+  console.log("notification status", props);
 
   const [_document, set_document] = useState(null)
 

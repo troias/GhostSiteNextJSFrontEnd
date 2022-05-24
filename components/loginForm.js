@@ -8,7 +8,7 @@ const LoginForm = () => {
 
     const ctx = useContext(AuthContext);
 
-    console.log("isLostPassword", ctx.isLostPassword);
+    // console.log("isLostPassword", ctx.isLostPassword);
 
     const formik = useFormik({
         initialValues: {
@@ -129,7 +129,7 @@ const LoginForm = () => {
                 <a href="#" className="text-sm text-blue-700 hover:underline dark:text-blue-500" onClick={() => ctx.setIsLostPassword(true)}>{!ctx.isLostPassword && "Lost Password?"}</a>
             </div>
         
-            {(ctx.isLostPassword) ? (lostPasswordButton) : (ctx.registering ? registerButton : loginButton)}
+            {(ctx.isLostPassword) ? (lostPasswordButton) : (ctx.registering ? (registerButton ) : loginButton)}
            
             {/* {!ctx.registering && !ctx.isLostPassword && loginButton}
                     {ctx.registering && registerButton} */}

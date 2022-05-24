@@ -7,8 +7,8 @@ import { useRouter } from 'next/router'
 
  const Footer = ({data}) => {
   const router = useRouter()
-  const isHome = router.pathname === '/'
-  console.log("footerData", data);
+  // const isHome = router.pathname === '/'
+  // console.log("footerData", data);
 
 
   return (
