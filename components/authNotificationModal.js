@@ -15,9 +15,9 @@ const AuthNotificationModal = () => {
     const success = ctx.success;
     const isLostPassword = ctx.isLostPassword;
 
-     console.log("AuthNotificationModal", error)
-     console.log("AuthNotificationModalSuccess", success  )
-     console.log("isLostPassword", isLostPassword)
+    //  console.log("AuthNotificationModalError", error)
+    //  console.log("AuthNotificationModalSuccess", success  )
+    //  console.log("isLostPassword", isLostPassword)
 
     return (
         <div className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" >
@@ -54,7 +54,7 @@ const AuthNotificationModal = () => {
                         <BsCheckCircle size={50} className="text-red-500 mb-6 " />
                     </div>
                     <div>
-                    <p className="text-sm text-gray-900 dark:text-gray-500">{error.message}</p>
+                    <p className="text-sm text-gray-900 dark:text-gray-500">{error }</p>
                     </div>
                    
                 </div>)}

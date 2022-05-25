@@ -1,19 +1,35 @@
 import { getStrapiMedia } from "../lib/media"
+import { useEffect } from "react"
 import NextImage from "next/image"
 
-const Image = ({ image, style }) => {
+const Image = ({ image, style, customDimensions }) => {
   const { url, alternativeText, width, height } = image.data.attributes
+  console.log("innerImagedata", image.data.attributes);
+
+  let layout 
+  if (!width || !height && !customDimensions) {
+    layout = `fill`
+
+  } else {
+    layout = `responsive`
+  }
+
+  console.log("layout", customDimensions);
+
+
 
   const loader = () => {
     return getStrapiMedia(image)
   }
 
+  
   return (
+
     <NextImage
       loader={loader}
-      layout="responsive"
-      width={width}
-      height={height}
+      layout={layout}
+      width={ width || customDimensions.width}
+      height={ height || customDimensions.height}  
       objectFit="contain"
       src={getStrapiMedia(image)}
       alt={alternativeText || ""}

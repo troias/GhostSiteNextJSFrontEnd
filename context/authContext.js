@@ -80,7 +80,7 @@ export const AuthProvider = (props) => {
 
         const timeout = setTimeout(() => {
         
-          
+          setLoading(false);
           clearTimeout(timeout);
         }, 3000);
        
@@ -141,7 +141,7 @@ export const AuthProvider = (props) => {
       if (data.error.message) {
         setError(data.error.message);
 
-
+        setSuccess(false);
         const timeout = setTimeout(() => {
           setLoading(false);
           
@@ -196,14 +196,14 @@ export const AuthProvider = (props) => {
 
       if (data.error) {
       
-        setError(data.error);
+        setError(data.error.message);
         const timeout = setTimeout(() => {
 
         setLoading(false);
         clearTimeout(timeout);
         }, 1500);
 
-          console.log("lostPasswordInnerDataError", data.error);
+          // console.log("lostPasswordInnerDataError", data.error);
         return data.error;
       }
 

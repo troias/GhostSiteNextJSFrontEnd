@@ -15,11 +15,11 @@ export const GlobalContext = createContext({})
 
 
 
-const MyApp = ({ Component, pageProps, categories }) => {
+const MyApp = ({ Component, pageProps, categories, logo }) => {
   const [showModal, setShowModal] = useState(false);
   const { global } = pageProps
   const footerData = global.attributes.footer
-  // console.log("footerDataApp", global);
+  console.log("logoGlobval", logo);
 
   return (
     <>
@@ -32,7 +32,7 @@ const MyApp = ({ Component, pageProps, categories }) => {
       <GlobalContext.Provider value={global.attributes}>
         <AuthProvider>
           <ScrollProvider>
-          <Layout showModal={setShowModal} categories={categories} footer={footerData} >
+          <Layout showModal={setShowModal} categories={categories} footer={footerData} logo={logo}  >
         <Component {...pageProps} />
         
         </Layout>
@@ -54,6 +54,7 @@ MyApp.getInitialProps = async (ctx) => {
   const globalRes = await fetchAPI("/global", {
     populate: {
       favicon: "*",
+      logo: "*",
       defaultSeo: {
         populate: "*",
       },
@@ -66,7 +67,7 @@ MyApp.getInitialProps = async (ctx) => {
     populate: "*",
   })
   // Pass the data to our page via props
-  return { ...appProps, pageProps: { global: globalRes.data }, categories: categoriesRes.data }
+  return { ...appProps, pageProps: { global: globalRes.data }, categories: categoriesRes.data, logo: globalRes.data.attributes.logo }
 }
 
 export default MyApp

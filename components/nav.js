@@ -7,7 +7,7 @@ import Portal from "../components/portal"
 import Modal from "../components/modal"
 import { useRouter } from "next/router";
 
-const Nav = ({ categories, showModal }) => {
+const Nav = ({ categories, logo }) => {
 
   const ctx = useContext(ScrollContext);
   const authCtx = useContext(AuthContext);
@@ -38,7 +38,7 @@ const Nav = ({ categories, showModal }) => {
   // console.log("contactRef", ctx.contactRef)
   // console.log("aboutRef", ctx.aboutRef)
 
-  
+  console.log("image", logo)
 
 
   const scrollToRef = (ref) => ref.current && ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -47,16 +47,34 @@ const Nav = ({ categories, showModal }) => {
 
 
 
+ 
+
+  // const updatedNavLogoData =  {
+  //   ...logo.data.attributes,
+  //   width: 300  ,
+  //   height: 300,
+  
+  // }
+
+  // const updatedNavLogo = {
+  //   data: {
+  //     id: logo.data.id,
+  //     attributes: updatedNavLogoData,
+  //   }
+  // }
+
+  // console.log("NavLogo", updatedNavLogo)
+
   return (
 
     <div>
       <nav className="uk-navbar-container flex pl-10 pr-4" data-uk-navbar>
-        <div className="uk-navbar-left">
+        <div className="uk-navbar-left ">
           <ul className="uk-navbar-nav ">
             <ul className="uk-nav uk-navbar-dropdown-nav"></ul>
             <li className="m-0" >
               <Link href="/">
-                <a>TheNobodies</a>
+              <img className="w-[250px] h-[30px] "  src={logo.data.attributes.url} alt={logo.data.attributes.alternativeText} />
               </Link>
             </li>
           </ul>
