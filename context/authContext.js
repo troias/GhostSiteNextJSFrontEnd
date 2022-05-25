@@ -59,7 +59,7 @@ export const AuthProvider = (props) => {
         ),
       });
       const data = await response.json();
-      // console.log("registerUserData", data);
+       console.log("registerUserData", data);
       
       if (data.user) {
         localStorage.setItem("user", JSON.stringify(data));
@@ -68,6 +68,7 @@ export const AuthProvider = (props) => {
         setLoggedIn(true);
         setLoading(false);
         setModalOpen(false);
+      
         // console.log("login", data)
         return data;
       }
@@ -79,19 +80,23 @@ export const AuthProvider = (props) => {
         setError(data.error.message);
 
         const timeout = setTimeout(() => {
-        
+          setError(data.error.message);
+          setSuccess(false);
           setLoading(false);
           clearTimeout(timeout);
         }, 3000);
        
-        // console.log("returned", data.error.message);
+       console.log("registerError", data.error.message);
         return data.error;
       }
+
+      setSuccess(true);
 
 
     } catch (error) {
       const timeout = setTimeout(() => {
         setLoading(false);
+        setSuccess(false);
         
         clearTimeout(timeout);
       }, 3000);
@@ -125,11 +130,18 @@ export const AuthProvider = (props) => {
       if (data.user) {
 
         localStorage.setItem("user", JSON.stringify(data));
+
+        setSuccess(true);
+        const timeout = setTimeout(() => {
+
         setLoading(false);
         setUser(data);
         setLoggedIn(true);
-        setSuccess(true);
+       
         setModalOpen(false);
+
+        clearTimeout(timeout);
+        }, 1500);
 
         // console.log("login", data)
         return data;
@@ -139,14 +151,15 @@ export const AuthProvider = (props) => {
 
 
       if (data.error.message) {
-        setError(data.error.message);
+        
 
-        setSuccess(false);
+       
         const timeout = setTimeout(() => {
           setLoading(false);
-          
+          setError(data.error.message);
+          setSuccess(false);
           clearTimeout(timeout);
-        }, 3000);
+        }, 1500);
 
        
         // console.log("returned", data.error.message);
@@ -166,7 +179,7 @@ export const AuthProvider = (props) => {
         setLoading(false);
        
         clearTimeout(timeout);
-      }, 3000);
+      }, 1500);
 
      
       return error
@@ -251,12 +264,7 @@ export const AuthProvider = (props) => {
     }
   };
 
-  // useEffect(() => {
-  //   checkIsLoggedIn()
-  //   return () => {
-  //   }
 
-  // }, [user])
 
   return (
     <AuthContext.Provider

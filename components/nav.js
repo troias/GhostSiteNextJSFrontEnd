@@ -68,7 +68,7 @@ const Nav = ({ categories, logo }) => {
   return (
 
     <div>
-      <nav className="uk-navbar-container flex pl-10 pr-4" data-uk-navbar>
+      <nav className="uk-navbar-container flex  pr-4" data-uk-navbar>
         <div className="uk-navbar-left ">
           <ul className="uk-navbar-nav ">
             <ul className="uk-nav uk-navbar-dropdown-nav"></ul>

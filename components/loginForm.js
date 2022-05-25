@@ -79,7 +79,7 @@ const LoginForm = () => {
             <h3 className="text-xl font-medium text-gray-900 dark:text-white">{ctx.isLostPassword ? "Please submit if you forgot password" : (!ctx.registering ? "Login to our platform" : "Register to out platform")}</h3>
 
             {ctx.registering && !ctx.isLostPassword && <div>
-                <label htmlfor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
+                <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Username</label>
                 <input
                     type="username"
                     name="username"
