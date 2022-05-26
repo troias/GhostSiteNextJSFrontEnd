@@ -32,7 +32,7 @@ export const AuthProvider = (props) => {
 
 
   const logOutUser = () => {
-
+    setError("");
     localStorage.removeItem("user");
     setUser(null);
     setLoggedIn(false)
@@ -43,7 +43,7 @@ export const AuthProvider = (props) => {
   const registerUser = async (username, email, password) => {
 
     // console.log("registerUserData", username, email, password);
-   
+    setError("");
     try {
       setLoading(true);
       const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/auth/local/register`, {
@@ -79,12 +79,13 @@ export const AuthProvider = (props) => {
 
       if (data.error.message) {
         setError(data.error.message);
+        setError(null);
 
         const timeout = setTimeout(() => {
           setError(data.error.message);
           setSuccess(false);
           setLoading(false);
-          setError(null);
+          
           clearTimeout(timeout);
         }, 3000);
        
@@ -96,10 +97,11 @@ export const AuthProvider = (props) => {
 
 
     } catch (error) {
+      setError("error" + error)
       const timeout = setTimeout(() => {
         setLoading(false);
         setSuccess(false);
-        setError("error" + error)
+       
         clearTimeout(timeout);
       }, 3000);
 
@@ -109,7 +111,7 @@ export const AuthProvider = (props) => {
   };
 
   const loginUser = async (identifier, password) => {
-
+    setError("");
     // console.log("logindatacheck", identifier, password);
     try {
       setLoading(true);
@@ -154,11 +156,11 @@ export const AuthProvider = (props) => {
 
       if (data.error.message) {
         
-
+        setError(data.error.message);
        
         const timeout = setTimeout(() => {
           setLoading(false);
-          setError(data.error.message);
+         
           setSuccess(false);
           clearTimeout(timeout);
         }, 1500);
@@ -191,7 +193,7 @@ export const AuthProvider = (props) => {
 
   const lostPassword = async (email) => {
     //  console.log("lostPassord", email);
-   
+    setError("");
     try {
       setLoading(true);
 
