@@ -67,6 +67,7 @@ export const AuthProvider = (props) => {
         setUser(data);
         setLoggedIn(true);
         setLoading(false);
+        setSuccess(true);
         setModalOpen(false);
       
         // console.log("login", data)
@@ -83,6 +84,7 @@ export const AuthProvider = (props) => {
           setError(data.error.message);
           setSuccess(false);
           setLoading(false);
+          setError(null);
           clearTimeout(timeout);
         }, 3000);
        
@@ -90,18 +92,18 @@ export const AuthProvider = (props) => {
         return data.error;
       }
 
-      setSuccess(true);
+      
 
 
     } catch (error) {
       const timeout = setTimeout(() => {
         setLoading(false);
         setSuccess(false);
-        
+        setError("error" + error)
         clearTimeout(timeout);
       }, 3000);
 
-      setError("error" + error)
+      
     }
 
   };
