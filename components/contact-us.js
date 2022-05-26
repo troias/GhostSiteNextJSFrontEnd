@@ -104,7 +104,7 @@ const ContactUs = (props) => {
         const token = JSON.parse(userObj).jwt
 
 
-        const request = await fetch('http://localhost:1337/api/lead-form-submissions', {
+        const request = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/lead-form-submissions`, {
           method: 'POST',
           authorization: `Bearer ${token}}`,
           body: data
@@ -113,7 +113,7 @@ const ContactUs = (props) => {
 
 
         const response = await request.json();
-        // console.log("data", data);
+         console.log("Contactdata", data);
 
 
 
@@ -124,11 +124,17 @@ const ContactUs = (props) => {
           setStatus("success")
 
         }
-        else {
+        if (response.error)  {
           alert("Something went wrong");
           setTitle("Error submitting investigation")
           setMessage("error")
           setStatus('error')
+          
+          const timer = setTimeout(() => {
+            setSubmitting(false);
+            clearTimeout(timer);
+          }, 1000);
+
         }
 
       }
@@ -139,7 +145,7 @@ const ContactUs = (props) => {
         setSubmitting(true);
         setStatus('pending')
 
-        const req = await fetch('http://localhost:1337/api/annon-leadform-submissions', {
+        const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/annon-leadform-submissions`, {
           method: 'POST',
           body: data
         });
@@ -206,7 +212,7 @@ const ContactUs = (props) => {
 
   return (
     <section id="#contact" ref={scrollCtx.contactRef} >
-      {status && <Notification message={message} title={title} submitting={submitting} status={status} />}
+      {status && <Notification message={message} title={title} submitting={submitting} status={status} onClick={() => setSubmitting(false)} />}
       <div className="uk-tile-default">
         <h1 className="text-4xl ">
           contact
