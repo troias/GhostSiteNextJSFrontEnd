@@ -236,7 +236,7 @@ const ContactUs = (props) => {
                   Signup
                 </span>
               </a>
-            </>)} or submit an investigation anonymously <span className="text-blue-500"> <i className="fas fa-user-circle"></i></span>
+            </>)} {!ctx.user && "or"} submit an investigation anonymously <span className="text-blue-500"> <i className="fas fa-user-circle"></i></span>
 
 
           </p>
