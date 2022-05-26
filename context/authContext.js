@@ -79,7 +79,7 @@ export const AuthProvider = (props) => {
 
       if (data.error.message) {
         setError(data.error.message);
-        setError(null);
+      
 
         const timeout = setTimeout(() => {
           setError(data.error.message);
