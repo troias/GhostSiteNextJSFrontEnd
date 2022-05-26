@@ -223,7 +223,7 @@ const ContactUs = (props) => {
                 </span>
               </a>
               <span className="text-black mr-2 ml-2">
-                or
+                /
               </span>
               <a href="#" onClick={() => {
                 ctx.setModalOpen(true);
@@ -236,7 +236,9 @@ const ContactUs = (props) => {
                   Signup
                 </span>
               </a>
-            </>)} to submit your scary photo or contact us so we can investigate and get back to you.
+            </>)} or submit an investigation anonymously <span className="text-blue-500"> <i className="fas fa-user-circle"></i></span>
+
+
           </p>
           <form onSubmit={formik.handleSubmit}>
             <fieldset className="uk-fieldset pt-8">

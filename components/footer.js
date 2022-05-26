@@ -3,12 +3,13 @@ import {BsInstagram}  from 'react-icons/bs'
 import {AiOutlineFacebook} from 'react-icons/ai'
 import {TiSocialTwitterCircular} from 'react-icons/ti'
 import {AiOutlineYoutube} from 'react-icons/ai'
+import {RiMessengerLine} from 'react-icons/ri'
 import { useRouter } from 'next/router'
 
  const Footer = ({data}) => {
   const router = useRouter()
   // const isHome = router.pathname === '/'
-  // console.log("footerData", data);
+   console.log("footerData", data);
 
 
   return (
@@ -22,15 +23,18 @@ import { useRouter } from 'next/router'
             <a href={data.footer_social_links[0].url} target="_blank" rel="noopener noreferrer">
           <AiOutlineFacebook className="text-2xl mr-4" />
             </a>
-            <a href={data.footer_social_links[0].url} target="_blank" rel="noopener noreferrer">
+            <a href={data.footer_social_links[1].url} target="_blank" rel="noopener noreferrer">
           <TiSocialTwitterCircular className="text-2xl mr-4" />
             </a>
-            <a href={data.footer_social_links[0].url} target="_blank" rel="noopener noreferrer">
+            <a href={data.footer_social_links[2].url} target="_blank" rel="noopener noreferrer">
           <AiOutlineYoutube className="text-2xl mr-4" />
             </a>
-            <a href={data.footer_social_links[0].url} target="_blank" rel="noopener noreferrer">
+            <a href={data.footer_social_links[3].url} target="_blank" rel="noopener noreferrer">
           <BsInstagram className="text-2xl mr-4" />
             </a>
+            <a href={data.footer_social_links[4].url}  target="_blank" rel="noopener noreferrer">
+              <RiMessengerLine className="text-2xl mr-4" />
+               </a>
           </div>
           
      

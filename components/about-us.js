@@ -4,6 +4,7 @@ import {BsInstagram}  from 'react-icons/bs'
 import {AiOutlineFacebook} from 'react-icons/ai'
 import {TiSocialTwitterCircular} from 'react-icons/ti'
 import {AiOutlineYoutube} from 'react-icons/ai'
+import {RiMessengerLine} from 'react-icons/ri'
 import { useRouter } from 'next/router'
 
  const AboutUs = ({aboutData}) => {
@@ -13,7 +14,7 @@ import { useRouter } from 'next/router'
     const router = useRouter();
   
 
-  // console.log("social", about.social_links[0].url);
+   console.log("social", about.social_links);
   
   useEffect(() => {
      
@@ -64,6 +65,9 @@ import { useRouter } from 'next/router'
                </a>
                <a href={about.social_links[3].url} target="_blank" rel="noopener noreferrer">
               <AiOutlineYoutube size={50}/>
+               </a>
+               <a href={about.social_links[4].url} target="_blank" rel="noopener noreferrer">
+              <RiMessengerLine size={50}/>
                </a>
       </div>
   
