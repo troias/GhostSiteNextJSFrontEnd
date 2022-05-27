@@ -23,11 +23,11 @@ const Nav = ({ categories, logo }) => {
     <div>
       <nav className="uk-navbar-container flex  pr-4" data-uk-navbar>
         <div className="uk-navbar-left ">
-          <ul className="uk-navbar-nav ">
-            <ul className="uk-nav uk-navbar-dropdown-nav"></ul>
-            <li className="m-0" >
+          <ul className="uk-navbar-nav  ml-3 lg:ml-0">
+            <ul className="uk-nav uk-navbar-dropdown-nav "></ul>
+            <li className=" " >
               <Link href="/">
-              <img className="  h-[30px] w-[100px] sm:w-[250px]  "  src={logo.data.attributes.url} alt={logo.data.attributes.alternativeText} />
+              <img className="  h-[30px] w-[100px] md:w-[250px]  "  src={logo.data.attributes.url} alt={logo.data.attributes.alternativeText} />
               </Link>
             </li>
           </ul>
