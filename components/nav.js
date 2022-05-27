@@ -12,33 +12,8 @@ const Nav = ({ categories, logo }) => {
   const ctx = useContext(ScrollContext);
   const authCtx = useContext(AuthContext);
 
-  // const [isBrowser, setIsBrowser] = useState(false);
   const router = useRouter();
 
-  // console.log("routerPath", router.asPath)
-
-  // const contactLink = (
-  //   <Link href="/contact-us">
-  //     <a className="text-white text-lg font-bold hover:text-gray-900">
-  //       Contact Us
-  //     </a>
-  //   </Link>
-  // );
-
-
-//  console.log("ctxUser", authCtx.user);
-
-  // useEffect(() => {
-  //   setIsBrowser(true);
-
-   
-  // }, [])
-
-
-  // console.log("contactRef", ctx.contactRef)
-  // console.log("aboutRef", ctx.aboutRef)
-
-  console.log("image", logo)
 
 
   const scrollToRef = (ref) => ref.current && ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -47,23 +22,6 @@ const Nav = ({ categories, logo }) => {
 
 
 
- 
-
-  // const updatedNavLogoData =  {
-  //   ...logo.data.attributes,
-  //   width: 300  ,
-  //   height: 300,
-  
-  // }
-
-  // const updatedNavLogo = {
-  //   data: {
-  //     id: logo.data.id,
-  //     attributes: updatedNavLogoData,
-  //   }
-  // }
-
-  // console.log("NavLogo", updatedNavLogo)
 
   return (
 
@@ -74,7 +32,7 @@ const Nav = ({ categories, logo }) => {
             <ul className="uk-nav uk-navbar-dropdown-nav"></ul>
             <li className="m-0" >
               <Link href="/">
-              <img className="w-[250px] h-[30px] "  src={logo.data.attributes.url} alt={logo.data.attributes.alternativeText} />
+              <img className=" w-[100] h-[60px] lg:w-[250px]  "  src={logo.data.attributes.url} alt={logo.data.attributes.alternativeText} />
               </Link>
             </li>
           </ul>
