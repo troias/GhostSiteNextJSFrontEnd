@@ -87,7 +87,7 @@ const ContactUs = (props) => {
 
 
       if (ctx.user) {
-        setMessage("pending")
+        setMessage("Pending")
         setTitle("Submitting investigation")
         setSubmitting(true);
         setStatus('pending')
@@ -137,8 +137,9 @@ const ContactUs = (props) => {
       }
 
       if (!ctx.user) {
-        setSubmitting(true);
         setMessage("Pending")
+        setSubmitting(true);
+        setStatus('Pending')
         setTitle("Submitting investigation")
       
         
