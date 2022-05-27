@@ -12,14 +12,6 @@ const ContactUs = (props) => {
   const scrollCtx = useContext(ScrollContext);
 
 
-  // console.log("ContactUser", ctx.user)
-
-
-  // const parsedData = JSON.parse(ctx.user);
-  // const userId = parsedData.user.id
-  // console.log("ctxsuser", ctx.user.user.id)
-  // console.log("userID", userId);
-
   const [status, setStatus] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [message, setMessage] = useState("");
@@ -71,7 +63,7 @@ const ContactUs = (props) => {
           name: values.name,
           reason: values.reason,
           info: values.message,
-          user: !ctx.user.user.id
+          user: ctx.user.user.id
         }
       } else {
         innerValbj = {
@@ -103,17 +95,22 @@ const ContactUs = (props) => {
         const userObj = localStorage.getItem("user")
         const token = JSON.parse(userObj).jwt
 
+        console.log("token", ctx.user.jwt);
+
 
         const request = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/lead-form-submissions`, {
           method: 'POST',
-          authorization: `Bearer ${token}}`,
+          headers: {
+            'Authorization': `Bearer ${ctx.user.jwt}`,
+          },
+         
           body: data
         });
 
 
 
         const response = await request.json();
-         console.log("Contactdata", data);
+         console.log("Contactdata", response);
 
 
 
@@ -125,7 +122,7 @@ const ContactUs = (props) => {
 
         }
         if (response.error)  {
-          alert("Something went wrong");
+          // alert("Something went wrong");
           setTitle("Error submitting investigation")
           setMessage("error")
           setStatus('error')
@@ -140,10 +137,11 @@ const ContactUs = (props) => {
       }
 
       if (!ctx.user) {
+        setSubmitting(true);
         setMessage("Pending")
         setTitle("Submitting investigation")
-        setSubmitting(true);
-        setStatus('pending')
+      
+        
 
         const req = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/annon-leadform-submissions`, {
           method: 'POST',
@@ -154,20 +152,23 @@ const ContactUs = (props) => {
         console.log("datares", res);
 
         if (!res.error) {
+
+          
           setTitle("Submitted investigation")
           setMessage("Success")
           setStatus("success")
         }
-        else {
-          alert("Something went wrong");
+        if (res.error) {
+          // alert("Something went wrong");
           setTitle("Error submitting investigation")
           setMessage("error")
           setStatus('error')
+          setSubmitting(false);
         }
 
 
 
-
+      
 
 
       }
