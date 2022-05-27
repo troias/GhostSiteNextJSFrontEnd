@@ -11,16 +11,11 @@ const Nav = ({ categories, logo }) => {
 
   const ctx = useContext(ScrollContext);
   const authCtx = useContext(AuthContext);
-
   const router = useRouter();
-
-
 
   const scrollToRef = (ref) => ref.current && ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
   const handleAboutClick = () => scrollToRef(ctx.aboutRef)
   const handleContactClick = () => scrollToRef(ctx.contactRef)
-
-
 
 
   return (
@@ -32,7 +27,7 @@ const Nav = ({ categories, logo }) => {
             <ul className="uk-nav uk-navbar-dropdown-nav"></ul>
             <li className="m-0" >
               <Link href="/">
-              <img className=" w-[100] h-[60px] lg:w-[250px]  "  src={logo.data.attributes.url} alt={logo.data.attributes.alternativeText} />
+              <img className="  h-[30px] w-[100px] sm:w-[250px]  "  src={logo.data.attributes.url} alt={logo.data.attributes.alternativeText} />
               </Link>
             </li>
           </ul>
@@ -66,26 +61,18 @@ const Nav = ({ categories, logo }) => {
                         <Link href={`/category/${category.attributes.slug}`}>
                           <a >{category.attributes.name}</a>
                         </Link>
-
                       </li>
                     )
                   })}
-
                 </ul>
               </div>
             </li>
+
             <li className="flex items-center">
             {!authCtx.user && <button className="uk-button uk-button-default uk-margin-small-right"
             onClick={() => authCtx.setModalOpen(true) }>Login</button>}
-         
-
-
           { authCtx.user &&  <button className="uk-button uk-button-default uk-margin-small-right"
             onClick={() => authCtx.logOutUser()}>Logout</button>}
-
-                  
-        
-
             </li>
           </ul>
 
