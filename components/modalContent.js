@@ -7,10 +7,10 @@ import AuthNotificationModal from './authNotificationModal';
 import lostPassword from './lostPassword';
 
 
-const ModalContent = ({ onClose }) => {
+const ModalContent = ({  }) => {
 
     const ctx = useContext(AuthContext);
-    // console.log("ctx", ctx.loginUser);
+  
 
 
     const handleCloseClick = (e) => {

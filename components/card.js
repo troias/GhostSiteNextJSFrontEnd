@@ -8,8 +8,7 @@ const Card = ({ article, investigation }) => {
 
   
 
-  // console.log("field", field)
-  // console.log("investigationCard", investigation)
+
   return (
     <Link href={`/${page}/${field.attributes.slug}`}>
       <a className="uk-link-reset">

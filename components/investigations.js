@@ -7,8 +7,7 @@ import Card from "../components/card"
      const leftInvestigations = investigations.slice(0, leftAInvestigationsCount)
      const rightInvestigations = investigations.slice(leftAInvestigationsCount, investigations.length)
     
-    // console.log("investigations", investigations)
-    // console.log("leftInvestigations", leftAInvestigationsCount)
+
   return (
     <div className="article-section pt-8">
     <h2 className="text-4xl pb-8 ">Investigations</h2>
@@ -16,7 +15,7 @@ import Card from "../components/card"
       <div className="uk-child-width-1-2@s" data-uk-grid="true">
         <div>
           {leftInvestigations.map((investigation, i) => {
-            // console.log("innerInvestigation", investigation)
+        
             return (
               <Card
               

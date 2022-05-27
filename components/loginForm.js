@@ -8,7 +8,7 @@ const LoginForm = () => {
 
     const ctx = useContext(AuthContext);
 
-    // console.log("isLostPassword", ctx.isLostPassword);
+  
 
     const formik = useFormik({
         initialValues: {
@@ -40,7 +40,7 @@ const LoginForm = () => {
             }
             if (ctx.isLostPassword) {
               
-                //  console.log("isLostPassword", ctx.isLostPassword);
+              
                 ctx.lostPassword(values.email);
             }
 

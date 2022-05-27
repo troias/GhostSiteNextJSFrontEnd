@@ -19,7 +19,7 @@ const MyApp = ({ Component, pageProps, categories, logo }) => {
   const [showModal, setShowModal] = useState(false);
   const { global } = pageProps
   const footerData = global.attributes.footer
-  console.log("logoGlobval", logo);
+ 
 
   return (
     <>

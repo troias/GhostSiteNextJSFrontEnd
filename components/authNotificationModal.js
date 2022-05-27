@@ -9,15 +9,13 @@ const AuthNotificationModal = () => {
 
     const isLoading = ctx.isLoading;
 
-    // console.log("isLoading", isLoading);
+
 
     const error = ctx.error;
     const success = ctx.success;
     const isLostPassword = ctx.isLostPassword;
 
-     console.log("AuthNotificationModalError", error)
-     console.log("AuthNotificationModalSuccess", success  )
-     console.log("isLostPassword", isLostPassword)
+
 
     return (
         <div className="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8" >

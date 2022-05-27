@@ -2,7 +2,7 @@ import React from 'react'
 import NextImage from "./image"
 
  const Hero = (props) => {
-    //  console.log("heroSectionProps", props)
+  
   return (
     <div className="lg:flex"> 
 

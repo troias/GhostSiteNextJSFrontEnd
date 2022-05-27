@@ -13,9 +13,9 @@ const Category = ({ category }) => {
   const articles = category.attributes.articles.data
   const investigations = category.attributes.investigations.data
 
-    // console.log("category details", category)
+
   return (
-    // <Layout categories={categories.data}>
+ 
    
       <div className="uk-section">
            <Seo seo={seo} />
@@ -25,7 +25,7 @@ const Category = ({ category }) => {
            { investigations.length > 0 && <Investigations investigations={category.attributes.investigations.data} />} 
         </div>
       </div>
-    // </Layout>
+
   )
 }
 

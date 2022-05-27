@@ -20,12 +20,9 @@ import { fetchAPI } from "../lib/api"
 
 const Home = ({ articles, categories, homepage, investigations, global }) => {
 
-  // console.log("globalData", global.attributes.footer);
-  const footerData = global.attributes.footer;
+ 
   const ctx = useContext(AuthContext);
-   console.log("homepagedata", homepage,);
-  // console.log("homePageProps", homepage);
-  // console.log("user", ctx.user);
+
 
   useEffect(() => {
     if (!ctx.user && localStorage.getItem("user")) {
@@ -41,15 +38,13 @@ const Home = ({ articles, categories, homepage, investigations, global }) => {
   
   });
 
-  // console.log("featuredInvestigations", featuredInvestigations);
-  // console.log("featuredArticles", featuredArticles);
-  // console.log("articles"  , articles);
 
 
 
-  const [showModal, setShowModal] = useState(false);
 
-  // console.log("showModal", showModal) 
+ 
+
+
 
   return (
   

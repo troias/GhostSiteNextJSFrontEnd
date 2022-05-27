@@ -4,7 +4,7 @@ import NextImage from "next/image"
 
 const Image = ({ image, style, customDimensions }) => {
   const { url, alternativeText, width, height } = image.data.attributes
-  console.log("innerImagedata", image.data.attributes);
+
 
   let layout 
   if (!width || !height && !customDimensions) {
@@ -14,7 +14,7 @@ const Image = ({ image, style, customDimensions }) => {
     layout = `responsive`
   }
 
-  console.log("layout", customDimensions);
+ 
 
 
 

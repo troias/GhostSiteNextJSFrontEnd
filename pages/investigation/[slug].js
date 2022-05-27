@@ -7,7 +7,7 @@ import NextImage  from '../../components/image'
 import Seo from '../../components/seo'
 import { getStrapiMedia } from '../../lib/media'
 
- const Investigation = ({investigation, categories}) => {
+ const Investigation = ({investigation}) => {
 
   const seo = {
     metaTitle: investigation.attributes.title,
@@ -17,7 +17,7 @@ import { getStrapiMedia } from '../../lib/media'
   }
   const imageUrl = getStrapiMedia(investigation.attributes.image)
 
-  // console.log("investigation", investigation);
+
   return (
    
     <div> 

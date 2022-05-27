@@ -20,7 +20,7 @@ const ContactUs = (props) => {
 
 
   if (status === "success") {
-    // console.log("inside success")
+  
     setTimeout(() => {
       setMessage("")
       setTitle("")
@@ -36,7 +36,7 @@ const ContactUs = (props) => {
 
   const [fileArr, setFileArr] = useState([]);
   const fileRef = useRef(null);
-  // console.log("fileRef", fileRef)
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -53,8 +53,8 @@ const ContactUs = (props) => {
         .required('Required')
     }),
     onSubmit: async values => {
-      //  console.log("clicked", ctx.modalOpen);
-      console.log("sumit", ctx);
+   
+    
 
       let innerValbj
 
@@ -74,7 +74,7 @@ const ContactUs = (props) => {
         }
       }
 
-      console.log("innerValbj", innerValbj);
+ 
 
       const data = new FormData();
 
@@ -95,7 +95,7 @@ const ContactUs = (props) => {
         const userObj = localStorage.getItem("user")
         const token = JSON.parse(userObj).jwt
 
-        console.log("token", ctx.user.jwt);
+       
 
 
         const request = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/api/lead-form-submissions`, {
@@ -110,7 +110,7 @@ const ContactUs = (props) => {
 
 
         const response = await request.json();
-         console.log("Contactdata", response);
+         
 
 
 
@@ -150,7 +150,7 @@ const ContactUs = (props) => {
         });
 
         const res = await req.json();
-        console.log("datares", res);
+       
 
         if (!res.error) {
 
@@ -181,7 +181,7 @@ const ContactUs = (props) => {
 
 
   const onFileChange = (e) => {
-    // console.log("e", e.target.files);
+   
     formik.setFieldValue('media', e.target.files);
     const fileList = e.target.files;
     const fileArray = [];
@@ -189,7 +189,7 @@ const ContactUs = (props) => {
       fileArray.push(fileList[i]);
     }
     setFileArr(fileArray);
-    // console.log("firstFile", fileArray);
+
   }
 
   useEffect(() => {

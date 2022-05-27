@@ -14,7 +14,7 @@ import { useRouter } from 'next/router'
     const router = useRouter();
   
 
-   console.log("social", about.social_links);
+   
   
   useEffect(() => {
      

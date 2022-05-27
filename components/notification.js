@@ -1,25 +1,21 @@
 import ReactDOM from 'react-dom';
 import { useEffect, useState } from 'react';
-import Head from 'next/head'
+
 
 import classes from './notification.module.css';
 
 function Notification(props) {
   const { title, message, status, submitting } = props;
 
-  console.log("notification status", props);
+ 
 
   const [_document, set_document] = useState(null)
 
-  // const clickHandler = (e) => {
-  //   if (e.target.className === classes.notification) {
-  //     set_document(null)
-  //   }
-  // }
+
 
   useEffect(() => set_document(document), [])
 
-//   console.log("Notification(props)", props)
+
 
   let statusClasses = '';
 
@@ -41,7 +37,7 @@ function Notification(props) {
 
   const cssClasses = `${classes.notification} ${statusClasses}`;
 
-  // console.log("cssClasses", cssClasses);
+ 
 
   return ReactDOM.createPortal(( <div className={cssClasses}><h2>{title}</h2><p>{message}</p> </div>), document.getElementById("myportal") )
 

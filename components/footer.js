@@ -4,12 +4,12 @@ import {AiOutlineFacebook} from 'react-icons/ai'
 import {TiSocialTwitterCircular} from 'react-icons/ti'
 import {AiOutlineYoutube} from 'react-icons/ai'
 import {RiMessengerLine} from 'react-icons/ri'
-import { useRouter } from 'next/router'
+
 
  const Footer = ({data}) => {
-  const router = useRouter()
-  // const isHome = router.pathname === '/'
-   console.log("footerData", data);
+
+
+
 
 
   return (
